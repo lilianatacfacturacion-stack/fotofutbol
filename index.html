@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPORTFRAME PRO</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900&family=Barlow:wght@300;400;500&family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--bk:#090909;--dk:#111114;--sf:#18181d;--bd:#2a2a32;--mt:#3a3a45;--ac:#e8ff00;--a2:#ff3c3c;--a3:#00c8ff;--tx:#f0f0f5;--td:#8888a0;--rr:12px;--tr:.22s cubic-bezier(.4,0,.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bk);color:var(--tx);font-family:'Barlow',sans-serif;font-size:15px;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--dk)}::-webkit-scrollbar-thumb{background:var(--mt);border-radius:2px}
+header{position:fixed;top:0;left:0;right:0;z-index:100;height:54px;background:rgba(9,9,9,.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 24px;gap:16px}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;display:flex;align-items:center;gap:8px}
+.ld{width:7px;height:7px;background:var(--ac);border-radius:50%;box-shadow:0 0 10px var(--ac);animation:pd 2s ease-in-out infinite}
+@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hr{margin-left:auto;display:flex;align-items:center;gap:10px}
+.sds{display:flex;gap:5px}
+.sd{width:24px;height:3px;background:var(--mt);border-radius:2px;transition:background var(--tr)}
+.sd.active{background:var(--ac)}.sd.done{background:var(--a3)}
+.shell{display:flex;min-height:100vh;padding-top:54px}
+.sidebar{width:292px;min-width:292px;background:var(--dk);border-right:1px solid var(--bd);display:flex;flex-direction:column;overflow-y:auto;position:sticky;top:54px;height:calc(100vh - 54px)}
+.ss{border-bottom:1px solid var(--bd);padding:15px}
+.sl{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--td);margin-bottom:11px}
+.mgrid{display:flex;flex-direction:column;gap:6px}
+.mc{background:var(--sf);border:1.5px solid var(--bd);border-radius:var(--rr);padding:11px 13px;cursor:pointer;transition:all var(--tr);display:flex;align-items:center;gap:11px;position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:background var(--tr)}
+.mc:hover{border-color:var(--mt);transform:translateX(2px)}
+.mc.active{border-color:var(--ac);background:rgba(232,255,0,.05)}.mc.active::before{background:var(--ac)}
+.mi{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.mc:nth-child(1) .mi{background:rgba(232,255,0,.12)}.mc:nth-child(2) .mi{background:rgba(0,120,255,.15)}.mc:nth-child(3) .mi{background:rgba(0,200,255,.12)}
+.mh h4{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:1px}
+.mh p{font-size:10px;color:var(--td);line-height:1.3}
+.fg{margin-bottom:11px}
+.fg label{display:block;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--td);margin-bottom:5px}
+.fi{width:100%;background:var(--sf);border:1.5px solid var(--bd);border-radius:7px;color:var(--tx);font-family:'Barlow',sans-serif;font-size:13px;padding:8px 11px;outline:none;transition:border-color var(--tr)}
+.fi:focus{border-color:var(--ac)}.fi::placeholder{color:var(--mt)}
+select.fi option{background:var(--dk)}
+.sg{margin-bottom:11px}
+.srow{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.slab{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--td)}
+.sv{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--ac)}
+input[type=range]{-webkit-appearance:none;width:100%;height:3px;background:var(--mt);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;background:var(--ac);border-radius:50%;box-shadow:0 0 6px rgba(232,255,0,.5)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all var(--tr);padding:9px 16px}
+.bp{background:var(--ac);color:var(--bk);width:100%;padding:13px;font-size:14px}
+.bp:hover{background:#fff;transform:translateY(-1px);box-shadow:0 5px 18px rgba(232,255,0,.3)}
+.bs{background:var(--sf);color:var(--tx);border:1.5px solid var(--bd);width:100%;padding:10px}
+.bs:hover{border-color:var(--ac);color:var(--ac)}
+.bdl{background:var(--a3);color:var(--bk);font-size:12px;padding:9px 16px}
+.bdl:hover{background:#fff;box-shadow:0 4px 14px rgba(0,200,255,.3)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.dz{border:2px dashed var(--mt);border-radius:var(--rr);padding:22px 16px;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;transition:all var(--tr);position:relative;overflow:hidden;margin-bottom:8px;display:block}
+.dz:hover,.dz.dragover{border-color:var(--ac);background:rgba(232,255,0,.04)}
+.dzi{font-size:24px;margin-bottom:5px;opacity:.5}
+.dzl{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--td);margin-bottom:2px}
+.dzs{font-size:10px;color:var(--mt)}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:7px}
+.ti{aspect-ratio:1;border-radius:6px;overflow:hidden;position:relative;border:1.5px solid var(--bd);cursor:pointer;transition:border-color var(--tr)}
+.ti.primary{border-color:var(--ac)}.ti img{width:100%;height:100%;object-fit:cover}
+.tr2{position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--a2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;opacity:0;transition:opacity var(--tr);cursor:pointer;border:none;color:#fff}
+.ti:hover .tr2{opacity:1}
+.tbg{position:absolute;bottom:2px;left:2px;background:var(--ac);color:var(--bk);font-family:'Barlow Condensed',sans-serif;font-size:7px;font-weight:700;letter-spacing:1px;padding:2px 4px;border-radius:3px}
+.ptabs{display:flex;border-bottom:1px solid var(--bd)}
+.ptab{flex:1;padding:10px 5px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--td);cursor:pointer;transition:all var(--tr);border-bottom:2px solid transparent;margin-bottom:-1px}
+.ptab.active{color:var(--ac);border-bottom-color:var(--ac)}
+.tc{display:none}.tc.active{display:block}
+.trow{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.tl{font-size:11px;color:var(--td)}
+.tog{width:33px;height:18px;background:var(--mt);border-radius:9px;position:relative;cursor:pointer;transition:background var(--tr);border:none;flex-shrink:0}
+.tog::after{content:'';position:absolute;width:12px;height:12px;background:var(--tx);border-radius:50%;top:3px;left:3px;transition:transform var(--tr)}
+.tog.on{background:var(--ac)}.tog.on::after{transform:translateX(15px)}
+.crow{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+.csw{width:25px;height:25px;border-radius:6px;cursor:pointer;border:2px solid transparent;transition:all var(--tr)}
+.csw:hover,.csw.active{border-color:var(--tx);transform:scale(1.1)}
+.ca{flex:1;display:flex;flex-direction:column;min-width:0;background:#0d0d10}
+.ct{height:44px;border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 16px;gap:7px;background:var(--dk)}
+.tl2{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--td);margin-right:3px}
+.fp{background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:3px 10px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--td);cursor:pointer;transition:all var(--tr);text-transform:uppercase}
+.fp.active{background:rgba(232,255,0,.12);border-color:var(--ac);color:var(--ac)}.fp:hover{border-color:var(--mt);color:var(--tx)}
+.tdv{width:1px;height:20px;background:var(--bd);margin:0 3px}
+.tac{background:none;border:none;padding:5px 7px;border-radius:5px;color:var(--td);font-size:11px;cursor:pointer;transition:all var(--tr);font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.tac:hover{background:var(--sf);color:var(--tx)}
+.cvp{flex:1;display:flex;align-items:center;justify-content:center;padding:26px;overflow:auto;position:relative}
+.cw{position:relative;box-shadow:0 0 0 1px var(--bd),0 16px 48px rgba(0,0,0,.7)}
+#mc{display:block;max-width:100%;max-height:calc(100vh - 185px)}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 28px;gap:13px}
+.ei{width:70px;height:70px;border-radius:16px;background:var(--sf);border:2px dashed var(--mt);display:flex;align-items:center;justify-content:center;font-size:30px;opacity:.33;animation:fl 3s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.et{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.33}
+.es{font-size:12px;color:var(--td);max-width:250px;opacity:.5;line-height:1.6}
+.sbar{height:32px;border-top:1px solid var(--bd);background:var(--dk);display:flex;align-items:center;padding:0 16px;gap:16px}
+.si{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--td);display:flex;align-items:center;gap:5px}
+.sd2{width:5px;height:5px;border-radius:50%;background:var(--mt)}
+.sd2.ready{background:var(--ac);box-shadow:0 0 5px var(--ac)}.sd2.proc{background:var(--a2);animation:pd 1s infinite}
+.pov{display:none;position:absolute;inset:0;background:rgba(9,9,9,.88);backdrop-filter:blur(8px);z-index:50;flex-direction:column;align-items:center;justify-content:center;gap:17px}
+.pov.vis{display:flex}
+.pt{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px}
+.pbw{width:250px;height:3px;background:var(--mt);border-radius:2px;overflow:hidden}
+.pbf{height:100%;background:linear-gradient(90deg,var(--ac),var(--a3));border-radius:2px;transition:width .3s ease;width:0}
+.ps{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--td)}
+.dlw{position:relative}
+.dlp{position:absolute;top:calc(100% + 5px);right:0;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rr);padding:5px;min-width:165px;z-index:50;display:none;flex-direction:column;gap:3px;box-shadow:0 8px 22px rgba(0,0,0,.5)}
+.dlp.open{display:flex}
+.dlo{padding:7px 9px;border-radius:5px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all var(--tr);display:flex;align-items:center;gap:6px;color:var(--td)}
+.dlo:hover{background:var(--mt);color:var(--tx)}
+.toast{position:fixed;bottom:18px;right:18px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rr);padding:11px 16px;font-size:12px;z-index:200;transform:translateY(16px);opacity:0;transition:all .3s ease;display:flex;align-items:center;gap:8px}
+.toast.show{transform:translateY(0);opacity:1}.toast.success{border-color:var(--ac)}.toast.error{border-color:var(--a2)}
+.mex{display:none}.mex.vis{display:block}
+.aok{color:#00c864!important}.aerr{color:var(--a2)!important}
+.tproc{opacity:.5;pointer-events:none}
+@media(max-width:680px){.shell{flex-direction:column}.sidebar{width:100%;height:auto;position:relative;top:0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><div class="ld"></div>SPORTFRAME <span style="color:var(--ac)">PRO</span></div>
+  <div class="hr"><div class="sds"><div class="sd active" id="s1"></div><div class="sd" id="s2"></div><div class="sd" id="s3"></div></div></div>
+</header>
+<div class="shell">
+<aside class="sidebar">
+  <div class="ss">
+    <div class="sl">01 — Modo</div>
+    <div class="mgrid">
+      <div class="mc active" onclick="setMode('individual',this)"><div class="mi">🏆</div><div class="mh"><h4>Individual</h4><p>Doble exposición premium</p></div></div>
+      <div class="mc" onclick="setMode('multifoto',this)"><div class="mi">⚡</div><div class="mh"><h4>Multifoto</h4><p>Match day — varios jugadores</p></div></div>
+      <div class="mc" onclick="setMode('equipo',this)"><div class="mi">🤝</div><div class="mh"><h4>Equipo</h4><p>Collage — franjas de fotos</p></div></div>
+      <div class="mc" onclick="setMode('libre',this)"><div class="mi" style="background:rgba(180,100,255,.15)">🎨</div><div class="mh"><h4>Diseño Libre</h4><p>Posición manual · fondo + jugadores</p></div></div>
+    </div>
+  </div>
+  <div class="ss" id="photoSection">
+    <div class="sl">02 — Fotos</div>
+    <label class="dz" id="dz" for="fi"><input type="file" id="fi" multiple accept="image/*" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none" onchange="handleFiles(event)"><div class="dzi">📸</div><div class="dzl">Toca para subir fotos</div><div class="dzs" id="dzh">Modo individual: 1-2 fotos</div></label>
+    <div class="tg" id="tg"></div>
+  </div>
+  <div class="ss">
+    <div class="sl" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><span>✂️ Recorte automático</span><span id="aSt" style="font-size:9px;letter-spacing:1.5px;padding:2px 7px;border-radius:10px;background:var(--mt);color:var(--td)">OFF</span></div>
+    <div style="font-size:10px;color:var(--td);margin-bottom:9px;line-height:1.5">API key de <strong style="color:var(--tx)">remove.bg</strong> — gratis en remove.bg/api</div>
+    <div style="display:flex;gap:6px">
+      <input type="password" class="fi" id="aKey" placeholder="Pega tu API key aquí" style="flex:1;font-size:11px" oninput="checkKey()">
+      <button class="btn bs" onclick="testKey()" style="padding:8px 10px;font-size:10px;white-space:nowrap;width:auto">✓ Test</button>
+    </div>
+    <div id="aMsg" style="font-size:10px;margin-top:6px;color:var(--td);min-height:14px"></div>
+  </div>
+  <div class="ptabs">
+    <div class="ptab active" onclick="showTab('info',this)">Info</div>
+    <div class="ptab" onclick="showTab('style',this)">Estilo</div>
+    <div class="ptab" onclick="showTab('fx',this)">FX</div>
+  </div>
+  <div class="ss tc active" id="tab-info">
+    <div class="fg"><label>Nombre jugador / equipo</label><input type="text" class="fi" id="iName" placeholder="Opcional" oninput="updateMeta()"></div>
+    <div class="fg"><label>Club / organización</label><input type="text" class="fi" id="iClub" placeholder="Opcional" oninput="updateMeta()"></div>
+    <div class="fg"><label>Número / posición</label><input type="text" class="fi" id="iNum" placeholder="Opcional" oninput="updateMeta()"></div>
+    <div style="display:none" id="equiTxt">
+      <div class="fg"><label>Texto cursivo línea 1</label><input type="text" class="fi" id="iCv1" placeholder="Opcional — ej: Football" oninput="updateMeta()"></div>
+      <div class="fg"><label>Texto cursivo línea 2</label><input type="text" class="fi" id="iCv2" placeholder="Opcional — ej: Moments" oninput="updateMeta()"></div>
+    </div>
+    <!-- LIBRE MODE PANEL -->
+    <div id="librePanel" style="display:none">
+
+      <!-- 1. BACKGROUND -->
+      <div class="fg">
+        <label>🖼 Fondo del diseño</label>
+        <label class="dz" for="lbBg" style="padding:12px">
+          <input type="file" id="lbBg" accept="image/*" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none" onchange="lbLoadBg(event)">
+          <div id="lbBgPrev" style="font-size:11px;color:var(--mt)">Toca para subir fondo</div>
+        </label>
+      </div>
+
+      <!-- 2. PLAYERS -->
+      <div class="fg">
+        <label>👤 Jugadores recortados (hasta 4)</label>
+        <label class="dz" for="lbPlayers" style="padding:10px;margin-bottom:6px">
+          <input type="file" id="lbPlayers" accept="image/*" multiple style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none" onchange="lbLoadPlayers(event)">
+          <div style="font-size:11px;color:var(--mt)">Añadir jugadores</div>
+        </label>
+        <button id="lbCutAllBtn" onclick="lbCutAll()" style="display:none;width:100%;margin-bottom:6px;padding:7px;background:none;border:1.5px solid rgba(0,200,100,.4);border-radius:7px;color:rgba(0,200,100,.85);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer">✂️ Recortar fondos</button>
+        <div id="lbPlayerGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px"></div>
+      </div>
+
+      <!-- 3. SHIELDS -->
+      <div class="fg">
+        <label>🛡 Escudos — local (1º) y visitante (2º)</label>
+        <label class="dz" for="lbBadges" style="padding:10px;margin-bottom:6px">
+          <input type="file" id="lbBadges" accept="image/*" multiple style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none" onchange="lbLoadBadges(event)">
+          <div style="font-size:11px;color:var(--mt)">Añadir escudo (se recorta auto)</div>
+        </label>
+        <div id="lbBadgeGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px"></div>
+      </div>
+
+      <!-- 4. MATCH INFO -->
+      <div style="background:rgba(255,255,255,0.04);border:1px solid var(--bd);border-radius:8px;padding:12px;margin-bottom:11px">
+        <div class="sl" style="margin-bottom:10px">⚽ Datos del partido</div>
+
+        <div class="fg">
+          <label>Equipo local</label>
+          <input type="text" class="fi" style="font-size:12px" placeholder="ej: ASTUR C.F." id="lbTeam0" oninput="scheduleRender()">
+        </div>
+        <div class="fg">
+          <label>Equipo visitante</label>
+          <input type="text" class="fi" style="font-size:12px" placeholder="ej: U.D. LLANERA" id="lbTeam1" oninput="scheduleRender()">
+        </div>
+        <div class="fg">
+          <label>Competición / liga</label>
+          <input type="text" class="fi" style="font-size:12px" placeholder="ej: LIGA NACIONAL JUVENIL" id="lbLeague" oninput="scheduleRender()">
+        </div>
+        <div class="fg">
+          <label>Texto central grande (GAME DAY…)</label>
+          <input type="text" class="fi" style="font-size:12px" placeholder="ej: GAME DAY" id="lbTxt0" oninput="scheduleRender()">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div class="fg" style="margin-bottom:0">
+            <label>Día / Fecha</label>
+            <input type="text" class="fi" style="font-size:12px" placeholder="ej: Domingo 12" id="lbTxt1" oninput="scheduleRender()">
+          </div>
+          <div class="fg" style="margin-bottom:0">
+            <label>Hora</label>
+            <input type="text" class="fi" style="font-size:12px" placeholder="ej: 18:00" id="lbTxt2" oninput="scheduleRender()">
+          </div>
+        </div>
+        <div class="fg" style="margin-top:7px;margin-bottom:0">
+          <label>Campo / Lugar</label>
+          <input type="text" class="fi" style="font-size:12px" placeholder="ej: Campo Pepe Quimarán" id="lbVenue" oninput="scheduleRender()">
+        </div>
+      </div>
+
+      <!-- 5. LAYOUT -->
+      <div class="fg">
+        <label>Distribución jugadores</label>
+        <select class="fi" id="lbLayout" onchange="scheduleRender()" style="font-size:12px">
+          <option value="two_sides">2 jugadores — izq y dcha</option>
+          <option value="center_big">1 jugador — pantalla completa</option>
+          <option value="pyramid">Pirámide — 1 arriba + resto abajo</option>
+          <option value="manual">Manual — sliders XY</option>
+        </select>
+      </div>
+
+      <!-- 6. STYLE -->
+      <div class="fg">
+        <label>Tipografía</label>
+        <select class="fi" id="lbFont" onchange="scheduleRender()" style="font-size:12px">
+          <option value="bebas">BEBAS NEUE — Sport impacto</option>
+          <option value="barlow">BARLOW CONDENSED — Moderno</option>
+          <option value="playfair">Playfair — Editorial cursivo</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Color texto principal</label>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          <div class="csw active" style="background:#ffffff" data-lbac="#ffffff" onclick="setLbAc(this)" title="Blanco"></div>
+          <div class="csw" style="background:#111111;border-color:var(--mt)" data-lbac="#111111" onclick="setLbAc(this)" title="Negro"></div>
+          <div class="csw" style="background:#888888" data-lbac="#888888" onclick="setLbAc(this)" title="Gris"></div>
+          <div class="csw" style="background:#cc1122" data-lbac="#cc1122" onclick="setLbAc(this)" title="Rojo"></div>
+          <div class="csw" style="background:#6b1020" data-lbac="#6b1020" onclick="setLbAc(this)" title="Granate"></div>
+          <div class="csw" style="background:#1a3a7e" data-lbac="#1a3a7e" onclick="setLbAc(this)" title="Azul"></div>
+          <div class="csw" style="background:#ffaa00" data-lbac="#ffaa00" onclick="setLbAc(this)" title="Naranja"></div>
+          <div class="csw" style="background:linear-gradient(135deg,#c8a96e,#f0d080)" data-lbac="gold" onclick="setLbAc(this)" title="Dorado"></div>
+          <div class="csw" style="background:linear-gradient(135deg,#9a9a9a,#e8e8e8)" data-lbac="silver" onclick="setLbAc(this)" title="Plateado"></div>
+          <div class="csw" style="background:rgba(255,255,255,0);border:1.5px solid var(--mt);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.15) 0,rgba(255,255,255,.15) 2px,transparent 0,transparent 50%);background-size:8px 8px" data-lbac="transparent" onclick="setLbAc(this)" title="Transparente"></div>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Color secundario (VS, fecha…)</label>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          <div class="csw active" style="background:#cc1122" data-lbsig="#cc1122" onclick="setLbSig(this)"></div>
+          <div class="csw" style="background:#ffaa00" data-lbsig="#ffaa00" onclick="setLbSig(this)"></div>
+          <div class="csw" style="background:#e8ff00" data-lbsig="#e8ff00" onclick="setLbSig(this)"></div>
+          <div class="csw" style="background:#00c8ff" data-lbsig="#00c8ff" onclick="setLbSig(this)"></div>
+          <div class="csw" style="background:#ffffff" data-lbsig="#ffffff" onclick="setLbSig(this)"></div>
+          <div class="csw" style="background:#ff00aa" data-lbsig="#ff00aa" onclick="setLbSig(this)"></div>
+          <div class="csw" style="background:linear-gradient(135deg,#c8a96e,#f0d080)" data-lbsig="gold" onclick="setLbSig(this)"></div>
+        </div>
+      </div>
+
+      <!-- 7. INTENSITY SLIDERS -->
+      <div class="fg" style="background:rgba(232,255,0,0.04);border:1px solid rgba(232,255,0,0.12);border-radius:7px;padding:9px;margin-bottom:11px">
+        <div style="font-size:10px;color:var(--td);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">📐 Tamaño jugadores</div>
+        <div style="font-size:10px;color:var(--tx);line-height:1.5">Usa el slider <strong>Tamaño jugadores / fotos</strong> de la pestaña Info para ajustar el tamaño de todos los jugadores en todos los modos.</div>
+      </div>
+      <div class="fg">
+        <label>Opacidad fondo</label>
+        <div style="display:flex;align-items:center;gap:8px">
+          <input type="range" min="20" max="100" value="100" id="lbBgOpa" style="flex:1" oninput="document.getElementById('vLbBgOpa').textContent=this.value;scheduleRender()">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--ac);min-width:24px" id="vLbBgOpa">100</span>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Tamaño texto central (GAME DAY)</label>
+        <div style="display:flex;align-items:center;gap:8px">
+          <input type="range" min="0" max="100" value="50" id="lbTxtSz" style="flex:1" oninput="document.getElementById('vLbTxtSz').textContent=this.value;scheduleRender()">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--ac);min-width:24px" id="vLbTxtSz">50</span>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Posición texto central (↑ arriba / abajo ↓)</label>
+        <div style="display:flex;align-items:center;gap:8px">
+          <input type="range" min="0" max="100" value="35" id="lbTxtPos" style="flex:1" oninput="document.getElementById('vLbTxtPos').textContent=this.value;scheduleRender()">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--ac);min-width:24px" id="vLbTxtPos">35</span>
+        </div>
+      </div>
+
+    </div>
+    <!-- END LIBRE PANEL -->
+
+    <div class="mex" id="mExtra">
+      <div class="fg"><label>Mi equipo</label><input type="text" class="fi" id="iMyT" placeholder="Opcional" oninput="updateMeta()"></div>
+      <div class="fg"><label>Rival</label><input type="text" class="fi" id="iRiv" placeholder="Opcional" oninput="updateMeta()"></div>
+      <div class="fg"><label>Fecha / kick-off</label><input type="text" class="fi" id="iDate" placeholder="Opcional" oninput="updateMeta()"></div>
+      <div class="fg"><label>Competición</label><input type="text" class="fi" id="iLeag" placeholder="Opcional" oninput="updateMeta()"></div>
+    </div>
+    <!-- Controles texto multifoto -->
+    <div id="multiTxtCtrl" style="display:none">
+      <div class="fg">
+        <label>Tamaño del texto</label>
+        <div style="display:flex;align-items:center;gap:8px">
+          <input type="range" min="10" max="100" value="50" id="slTxtSz" style="flex:1" oninput="document.getElementById('vTxtSz').textContent=this.value+'%';scheduleRender()">
+          <span class="sv" id="vTxtSz" style="width:32px;text-align:right">50%</span>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Posición vertical</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn bs" id="tpTop" onclick="setTxtPos('top',this)" style="flex:1;padding:6px;font-size:10px">Arriba</button>
+          <button class="btn bs" id="tpMid" onclick="setTxtPos('mid',this)" style="flex:1;padding:6px;font-size:10px">Centro</button>
+          <button class="btn bs" id="tpBot" onclick="setTxtPos('bot',this)" style="flex:1;padding:6px;font-size:10px;border-color:var(--ac);color:var(--ac)">Abajo</button>
+        </div>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Tamaño jugadores / fotos</label>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input type="range" min="40" max="150" value="100" id="slPlayerSz" style="flex:1" oninput="document.getElementById('vPlayerSz').textContent=this.value+'%';scheduleRender()">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--ac);min-width:30px" id="vPlayerSz">100%</span>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Tamaño del texto principal</label>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input type="range" min="0" max="100" value="50" id="slMainSz" style="flex:1" oninput="document.getElementById('vMainSz').textContent=this.value;scheduleRender()">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--ac);min-width:24px" id="vMainSz">50</span>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Posición del texto (↑ arriba / abajo ↓)</label>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input type="range" min="0" max="100" value="88" id="slMainPos" style="flex:1" oninput="document.getElementById('vMainPos').textContent=this.value;scheduleRender()">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--ac);min-width:24px" id="vMainPos">88</span>
+      </div>
+    </div>
+    <div class="fg"><label>Formato</label><select class="fi" id="sFmt" onchange="updateFormat()"><option value="social_post">Post (1080×1350)</option><option value="social_story">Story (1080×1920)</option><option value="print_a4">Impresión A4</option><option value="print_a3">Impresión A3</option></select></div>
+  </div>
+  <div class="ss tc" id="tab-style" style="display:none">
+    <div class="fg"><label>Color de fondo</label>
+      <div class="crow" id="bgC">
+        <div class="csw" style="background:#f0f0f5" data-bg="#f0f0f5" onclick="setBg(this)" title="Blanco/Gris"></div>
+        <div class="csw" style="background:#111111;border-color:var(--mt)" data-bg="#111111" onclick="setBg(this)" title="Negro"></div>
+        <div class="csw" style="background:#1a2a5e" data-bg="#1a2a5e" onclick="setBg(this)" title="Azul noche"></div>
+        <div class="csw active" style="background:linear-gradient(135deg,#060e2a,#0d2a6e)" data-bg="grad_blue" onclick="setBg(this)" title="Azul Champions"></div>
+        <div class="csw" style="background:linear-gradient(135deg,#2a0606,#6b1020)" data-bg="grad_red" onclick="setBg(this)" title="Rojo/Granate"></div>
+        <div class="csw" style="background:linear-gradient(135deg,#0a0a12,#1a1a30)" data-bg="grad_dark" onclick="setBg(this)" title="Oscuro"></div>
+        <div class="csw" style="background:linear-gradient(135deg,#0a1a08,#0a2a12)" data-bg="grad_green" onclick="setBg(this)" title="Verde"></div>
+        <div class="csw" style="background:linear-gradient(135deg,#1a0a2e,#2e1050)" data-bg="grad_purple" onclick="setBg(this)" title="Púrpura"></div>
+      </div>
+    </div>
+    <div class="fg"><label>Color texto / acento</label>
+      <div class="crow">
+        <div class="csw active" style="background:#ffffff" data-ac="#ffffff" onclick="setAc(this)" title="Blanco"></div>
+        <div class="csw" style="background:#111111;border-color:var(--mt)" data-ac="#111111" onclick="setAc(this)" title="Negro"></div>
+        <div class="csw" style="background:#888888" data-ac="#888888" onclick="setAc(this)" title="Gris"></div>
+        <div class="csw" style="background:#cc1122" data-ac="#cc1122" onclick="setAc(this)" title="Rojo"></div>
+        <div class="csw" style="background:#6b1020" data-ac="#6b1020" onclick="setAc(this)" title="Granate"></div>
+        <div class="csw" style="background:#1a3a7e" data-ac="#1a3a7e" onclick="setAc(this)" title="Azul"></div>
+        <div class="csw" style="background:#ffaa00" data-ac="#ffaa00" onclick="setAc(this)" title="Naranja"></div>
+        <div class="csw" style="background:linear-gradient(135deg,#c8a96e,#f0d080,#c8a96e)" data-ac="gold" onclick="setAc(this)" title="Dorado"></div>
+        <div class="csw" style="background:linear-gradient(135deg,#9a9a9a,#e8e8e8,#9a9a9a)" data-ac="silver" onclick="setAc(this)" title="Plateado"></div>
+        <div class="csw" style="background:rgba(255,255,255,0);border:1.5px solid var(--mt);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.15) 0,rgba(255,255,255,.15) 2px,transparent 0,transparent 50%);background-size:8px 8px" data-ac="transparent" onclick="setAc(this)" title="Transparente"></div>
+      </div>
+    </div>
+    <div class="fg"><label>Color firma / barra</label>
+      <div class="crow">
+        <div class="csw active" style="background:#cc1122" data-sig="#cc1122" onclick="setSig(this)" title="Rojo"></div>
+        <div class="csw" style="background:#6b1020" data-sig="#6b1020" onclick="setSig(this)" title="Granate"></div>
+        <div class="csw" style="background:#1a3a7e" data-sig="#1a3a7e" onclick="setSig(this)" title="Azul"></div>
+        <div class="csw" style="background:#ffffff" data-sig="#ffffff" onclick="setSig(this)" title="Blanco"></div>
+        <div class="csw" style="background:#111111;border-color:var(--mt)" data-sig="#111111" onclick="setSig(this)" title="Negro"></div>
+        <div class="csw" style="background:#888888" data-sig="#888888" onclick="setSig(this)" title="Gris"></div>
+        <div class="csw" style="background:#ffaa00" data-sig="#ffaa00" onclick="setSig(this)" title="Naranja"></div>
+        <div class="csw" style="background:linear-gradient(135deg,#c8a96e,#f0d080,#c8a96e)" data-sig="gold" onclick="setSig(this)" title="Dorado"></div>
+        <div class="csw" style="background:linear-gradient(135deg,#9a9a9a,#e8e8e8,#9a9a9a)" data-sig="silver" onclick="setSig(this)" title="Plateado"></div>
+        <div class="csw" style="background:rgba(255,255,255,0);border:1.5px solid var(--mt);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.15) 0,rgba(255,255,255,.15) 2px,transparent 0,transparent 50%);background-size:8px 8px" data-sig="transparent" onclick="setSig(this)" title="Transparente"></div>
+      </div>
+    </div>
+    <div class="fg"><label>Estilo tipografía</label>
+      <select class="fi" id="sTxt" onchange="scheduleRender()">
+        <option value="layered">Layered — entre capas</option>
+        <option value="clean">Bottom clean — minimal</option>
+        <option value="bold">Sport bold — impacto</option>
+      </select>
+    </div>
+  </div>
+  <div class="ss tc" id="tab-fx" style="display:none">
+    <div class="trow"><span class="tl">Viñeta perimetral</span><button class="tog on" onclick="toggleFx('vignette',this)"></button></div>
+    <div class="trow"><span class="tl">Sombra al suelo</span><button class="tog on" onclick="toggleFx('shadow',this)"></button></div>
+    <div class="trow"><span class="tl">Líneas decorativas</span><button class="tog on" onclick="toggleFx('lines',this)"></button></div>
+    <div class="trow"><span class="tl">Humo / niebla</span><button class="tog" onclick="toggleFx('smoke',this)"></button></div>
+    <div class="trow"><span class="tl">Halo de luz</span><button class="tog" onclick="toggleFx('light',this)"></button></div>
+    <div style="height:6px"></div>
+    <div class="sg"><div class="srow"><span class="slab">Opacidad silueta</span><span class="sv" id="vBg">65</span></div><input type="range" min="10" max="100" value="65" id="slBg" oninput="document.getElementById('vBg').textContent=this.value;scheduleRender()"></div>
+    <div class="sg"><div class="srow"><span class="slab">Contraste</span><span class="sv" id="vCon">55</span></div><input type="range" min="0" max="100" value="55" id="slCon" oninput="document.getElementById('vCon').textContent=this.value;scheduleRender()"></div>
+    <div class="sg"><div class="srow"><span class="slab">Saturación</span><span class="sv" id="vSat">60</span></div><input type="range" min="0" max="100" value="60" id="slSat" oninput="document.getElementById('vSat').textContent=this.value;scheduleRender()"></div>
+    <div class="sg"><div class="srow"><span class="slab">Intensidad FX</span><span class="sv" id="vFx">70</span></div><input type="range" min="0" max="100" value="70" id="slFx" oninput="document.getElementById('vFx').textContent=this.value;scheduleRender()"></div>
+  </div>
+  <div class="ss" style="margin-top:auto">
+    <button class="btn bp" id="btnGen" onclick="generate()" disabled>⚡ Generar Montaje</button>
+    <div style="height:7px"></div>
+    <button class="btn bs" onclick="resetApp()">↺ Reiniciar</button>
+  </div>
+</aside>
+
+<main class="ca">
+  <div class="ct">
+    <span class="tl2">Vista</span>
+    <div class="fp active" id="pill-social_post" onclick="setFmt('social_post')">1080×1350</div>
+    <div class="fp" id="pill-social_story" onclick="setFmt('social_story')">1080×1920</div>
+    <div class="fp" id="pill-print_a4" onclick="setFmt('print_a4')">A4</div>
+    <div class="fp" id="pill-print_a3" onclick="setFmt('print_a3')">A3</div>
+    <div class="tdv"></div>
+    <button class="tac" onclick="zoomFit()">⊞ Ajustar</button>
+    <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+      <span id="cInfo" style="font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--td);letter-spacing:1px">Sin contenido</span>
+      <div class="dlw">
+        <button class="btn bdl" id="btnDl" onclick="toggleDl()" disabled>↓ Descargar</button>
+        <div class="dlp" id="dlP">
+          <div class="dlo" onclick="dlAs('png')">🖼 PNG alta calidad</div>
+          <div class="dlo" onclick="dlAs('jpg')">📸 JPG redes</div>
+          <div class="dlo" onclick="dlAs('2x')">🖨 PNG 2× imprimir</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cvp" id="cvp">
+    <div class="pov" id="pOv"><div class="pt">PROCESANDO</div><div class="pbw"><div class="pbf" id="pF"></div></div><div class="ps" id="pS">Preparando...</div></div>
+    <div class="empty" id="emSt"><div class="ei">🎨</div><div class="et">Listo para crear</div><div class="es">Sube fotos, configura el estilo y genera tu montaje.</div></div>
+    <div class="cw" id="cW" style="display:none"><canvas id="mc"></canvas></div>
+  </div>
+  <div class="sbar">
+    <div class="si"><div class="sd2 ready" id="stD"></div><span id="stT">Listo</span></div>
+    <div class="si" id="szI">—</div>
+    <div class="si" style="margin-left:auto" id="iCnt">0 imágenes</div>
+  </div>
+</main>
+</div>
+<div class="toast" id="toast"><span id="tIco">✓</span><span id="tMsg">Listo</span></div>
+
+<script>
+const S={
+  mode:'individual', images:[],
+  lb:{bgImg:null,bgUrl:null,players:[],badges:[],acColor:'#ffffff',sigColor:'#cc1122'},
+  bgColor:'#f0f0f5', acColor:'#ffffff', sigColor:'#cc1122',
+  format:'social_post',
+  fx:{vignette:true,shadow:true,lines:true,smoke:false,light:false},
+  name:'',club:'',num:'',myTeam:'',rival:'',date:'',league:'',cv1:'',cv2:'',
+  txtPos:'bot', txtSz:50,
+  hasContent:false, pending:false
+};
+const FMTS={social_post:{w:1080,h:1350,label:'1080×1350'},social_story:{w:1080,h:1920,label:'1080×1920'},print_a4:{w:2480,h:3508,label:'A4 300dpi'},print_a3:{w:3508,h:4961,label:'A3 300dpi'}};
+
+/* ── API KEY localStorage ── */
+function loadSavedKey(){
+  try{
+    const saved=localStorage.getItem('spf_api_key');
+    if(saved){document.getElementById('aKey').value=saved;checkKey();}
+  }catch(e){}
+}
+function saveKey(){
+  try{localStorage.setItem('spf_api_key',document.getElementById('aKey').value.trim());}catch(e){}
+}
+
+/* ── Files ── */
+function handleFiles(e){Array.from(e.target.files||[]).filter(f=>f.type.startsWith('image/')).forEach(loadImg);e.target.value='';}
+async function loadImg(file){
+  const url=await readURL(file);const img=await imgFromURL(url);
+  const entry={file,dataUrl:url,img,original:url,removed:false,removing:false};
+  S.images.push(entry);rebuildThumbs();updateGenBtn();updateCnt();
+  if(S.hasContent)scheduleRender();
+  const k=document.getElementById('aKey').value.trim();
+  if(k.length>8){const idx=S.images.indexOf(entry);if(idx>=0)removeBg(idx);}
+}
+function readURL(f){return new Promise((r,j)=>{const fr=new FileReader();fr.onload=e=>r(e.target.result);fr.onerror=j;fr.readAsDataURL(f);});}
+function imgFromURL(url){return new Promise((r,j)=>{const i=new Image();i.onload=()=>r(i);i.onerror=j;i.src=url;});}
+async function removeBg(idx){
+  const e=S.images[idx];if(!e||e.removing)return;
+  const k=document.getElementById('aKey').value.trim();if(!k)return;
+  e.removing=true;rebuildThumbs();
+  try{
+    const blob=await(await fetch(e.original)).blob();
+    const fd=new FormData();
+    fd.append('image_file',blob,e.file?.name||'img.jpg');
+    fd.append('size','auto');
+    // Usar XMLHttpRequest — funciona desde archivo local en Android WebView donde fetch falla por CORS
+    const r=await new Promise((resolve,reject)=>{
+      const xhr=new XMLHttpRequest();
+      xhr.open('POST','https://api.remove.bg/v1.0/removebg',true);
+      xhr.setRequestHeader('X-Api-Key',k);
+      xhr.responseType='blob';
+      xhr.onload=()=>{
+        resolve({
+          ok:xhr.status===200,
+          status:xhr.status,
+          blob:()=>Promise.resolve(xhr.response),
+          json:()=>new Promise(res=>{
+            const fr=new FileReader();
+            fr.onload=ev=>{try{res(JSON.parse(ev.target.result));}catch(ex){res({errors:[{title:'Parse error'}]});}};
+            fr.readAsText(xhr.response);
+          })
+        });
+      };
+      xhr.onerror=()=>reject(new Error('Sin conexion a internet'));
+      xhr.ontimeout=()=>reject(new Error('Timeout'));
+      xhr.timeout=30000;
+      xhr.send(fd);
+    });
+    if(!r.ok){
+      const er=await r.json().catch(()=>({errors:[{title:'HTTP '+r.status}]}));
+      throw new Error(er.errors?.[0]?.title||'HTTP '+r.status);
+    }
+    const rb=await r.blob();
+    const ru=URL.createObjectURL(rb);
+    const ri=await imgFromURL(ru);
+    e.dataUrl=ru;e.img=ri;e.removed=true;e.removing=false;
+    rebuildThumbs();toast('✂️ Fondo eliminado','success');
+    if(S.hasContent)scheduleRender();
+  }catch(err){e.removing=false;rebuildThumbs();toast('remove.bg: '+err.message,'error');}
+}
+async function removeBgAll(){
+  const k=document.getElementById('aKey').value.trim();if(!k){toast('Necesitas una API key','error');return;}
+  for(let i=0;i<S.images.length;i++){if(!S.images[i].removed&&!S.images[i].removing)await removeBg(i);}
+}
+function rebuildThumbs(){
+  const g=document.getElementById('tg');g.innerHTML='';
+  S.images.forEach((it,i)=>{
+    const d=document.createElement('div');
+    d.className='ti'+(i===0?' primary':'')+(it.removing?' tproc':'');
+    const st=it.removing?'<div style="position:absolute;top:2px;left:2px;background:rgba(0,0,0,.7);border-radius:4px;padding:1px 4px;font-size:8px">✂️</div>':it.removed?'<div style="position:absolute;top:2px;left:2px;background:rgba(0,200,100,.85);border-radius:4px;padding:1px 4px;font-size:8px;color:#000;font-weight:700">✓</div>':'';
+    const k=document.getElementById('aKey').value.trim();
+    const cb=(!it.removed&&!it.removing&&k.length>8)?`<button style="position:absolute;bottom:2px;left:2px;background:rgba(0,0,0,.75);border:none;border-radius:3px;color:#fff;font-size:8px;padding:2px 5px;cursor:pointer" onclick="manualCut(${i},event)">✂️</button>`:'';
+    d.innerHTML=`<img src="${it.dataUrl}">${i===0?'<div class="tbg">PRINCIPAL</div>':''}${st}${cb}<button class="tr2" onclick="removeImg(${i},event)">×</button>`;
+    d.onclick=()=>setPrimary(i);g.appendChild(d);
+  });
+  const k2=document.getElementById('aKey').value.trim();
+  const nc=S.images.filter(x=>!x.removed&&!x.removing).length;
+  let rb=document.getElementById('rabBtn');
+  if(!rb){rb=document.createElement('button');rb.id='rabBtn';rb.className='btn bs';rb.style.cssText='width:100%;margin-top:8px;font-size:10px;padding:8px;border-color:rgba(0,200,100,.4);color:rgba(0,200,100,.8)';rb.onclick=removeBgAll;g.parentNode.appendChild(rb);}
+  rb.style.display=(k2.length>8&&S.images.length>0&&nc>0)?'':'none';
+  if(rb.style.display!=='none')rb.textContent=`✂️ Recortar ${nc} foto${nc>1?'s':''}`;
+  updateHint();
+}
+function manualCut(i,e){e.stopPropagation();removeBg(i);}
+function removeImg(i,e){e.stopPropagation();S.images.splice(i,1);rebuildThumbs();updateGenBtn();updateCnt();if(S.images.length===0)clearCanvas();else if(S.hasContent)scheduleRender();}
+function setPrimary(i){if(i===0)return;S.images.unshift(S.images.splice(i,1)[0]);rebuildThumbs();if(S.hasContent)scheduleRender();}
+function updateHint(){const h={individual:'Foto principal + foto fondo (opcional)',multifoto:'2-4 jugadores · el 1º va grande arriba',equipo:'2-6 fotos del equipo',libre:'Sube fondo, jugadores y escudos por separado'};document.getElementById('dzh').textContent=h[S.mode]||'';}
+function updateGenBtn(){
+  const m={individual:1,multifoto:2,equipo:2};
+  if(S.mode==='libre'){
+    // Libre needs at least a background OR at least one player
+    document.getElementById('btnGen').disabled=!S.lb.bgImg&&S.lb.players.length===0;
+  } else {
+    document.getElementById('btnGen').disabled=S.images.length<(m[S.mode]||1);
+  }
+}
+function updateCnt(){document.getElementById('iCnt').textContent=S.images.length+' imagen'+(S.images.length!==1?'es':'');}
+
+/* ── Drag Drop ── */
+const dzEl=document.getElementById('dz');
+dzEl.addEventListener('dragover',e=>{e.preventDefault();dzEl.classList.add('dragover')});
+dzEl.addEventListener('dragleave',()=>dzEl.classList.remove('dragover'));
+dzEl.addEventListener('drop',e=>{e.preventDefault();dzEl.classList.remove('dragover');Array.from(e.dataTransfer.files).filter(f=>f.type.startsWith('image/')).forEach(loadImg);});
+
+/* ── UI ── */
+function setMode(m,el){
+  S.mode=m;
+  document.querySelectorAll('.mc').forEach(c=>c.classList.remove('active'));el.classList.add('active');
+  // Show/hide mode-specific panels
+  const mExtra=document.getElementById('mExtra');
+  if(mExtra)mExtra.classList.toggle('vis',m==='multifoto');
+  const equiEl=document.getElementById('equiTxt');
+  if(equiEl)equiEl.style.display=m==='equipo'?'':'none';
+  const multiEl=document.getElementById('multiTxtCtrl');
+  if(multiEl)multiEl.style.display=m==='multifoto'?'':'none';
+  const libreEl=document.getElementById('librePanel');
+  if(libreEl)libreEl.style.display=m==='libre'?'':'none';
+  // Hide standard dropzone hint for libre (has its own upload UI)
+  const dzSection=document.getElementById('photoSection');
+  if(dzSection)dzSection.style.display=m==='libre'?'none':'';
+  updateHint();updateGenBtn();if(S.hasContent)scheduleRender();
+}
+function showTab(t,el){document.querySelectorAll('.ptab').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.querySelectorAll('.tc').forEach(x=>{x.style.display='none';x.classList.remove('active')});const tc=document.getElementById('tab-'+t);tc.style.display='';tc.classList.add('active');}
+function setFmt(f){S.format=f;document.querySelectorAll('.fp').forEach(p=>p.classList.remove('active'));document.getElementById('pill-'+f).classList.add('active');document.getElementById('sFmt').value=f;if(S.hasContent)scheduleRender();}
+function updateFormat(){setFmt(document.getElementById('sFmt').value);}
+function updateMeta(){
+  S.name=document.getElementById('iName').value.trim().toUpperCase();
+  S.club=document.getElementById('iClub').value.trim().toUpperCase();
+  S.num=document.getElementById('iNum').value.trim().toUpperCase();
+  S.myTeam=document.getElementById('iMyT').value.trim().toUpperCase();
+  S.rival=document.getElementById('iRiv').value.trim().toUpperCase();
+  S.date=document.getElementById('iDate').value.trim().toUpperCase();
+  S.league=document.getElementById('iLeag').value.trim().toUpperCase();
+  S.cv1=document.getElementById('iCv1').value.trim();
+  S.cv2=document.getElementById('iCv2').value.trim();
+  if(S.hasContent)scheduleRender();
+}
+function setTxtPos(pos,btn){
+  S.txtPos=pos;
+  document.querySelectorAll('#tpTop,#tpMid,#tpBot').forEach(b=>{b.style.borderColor='';b.style.color='';});
+  btn.style.borderColor='var(--ac)';btn.style.color='var(--ac)';
+  if(S.hasContent)scheduleRender();
+}
+function setBg(el){document.querySelectorAll('#bgC .csw').forEach(x=>x.classList.remove('active'));el.classList.add('active');S.bgColor=el.dataset.bg;if(S.hasContent)scheduleRender();}
+function setAc(el){document.querySelectorAll('[data-ac]').forEach(x=>x.classList.remove('active'));el.classList.add('active');S.acColor=el.dataset.ac;if(S.hasContent)scheduleRender();}
+function setSig(el){document.querySelectorAll('[data-sig]').forEach(x=>x.classList.remove('active'));el.classList.add('active');S.sigColor=el.dataset.sig;if(S.hasContent)scheduleRender();}
+function toggleFx(fx,btn){S.fx[fx]=!S.fx[fx];btn.classList.toggle('on');if(S.hasContent)scheduleRender();}
+function scheduleRender(){if(!S.hasContent||S.images.length===0)return;if(S.pending)return;S.pending=true;requestAnimationFrame(()=>{S.pending=false;render();});}
+function checkKey(){
+  const k=document.getElementById('aKey').value.trim();
+  const st=document.getElementById('aSt');
+  if(k.length>8){st.textContent='ON';st.style.cssText='font-size:9px;letter-spacing:1.5px;padding:2px 7px;border-radius:10px;background:rgba(0,200,100,.18);color:#00c864';saveKey();}
+  else{st.textContent='OFF';st.style.cssText='font-size:9px;letter-spacing:1.5px;padding:2px 7px;border-radius:10px;background:var(--mt);color:var(--td)';}
+}
+async function testKey(){
+  const k=document.getElementById('aKey').value.trim();const msg=document.getElementById('aMsg');
+  if(!k){msg.textContent='Introduce una API key primero';msg.className='aerr';return;}
+  msg.textContent='Verificando...';msg.className='';
+  try{const r=await fetch('https://api.remove.bg/v1.0/account',{headers:{'X-Api-Key':k}});const d=await r.json();
+    if(r.ok){const cr=d.data?.attributes?.credits?.total??'?';msg.innerHTML=`✓ Conectado · <strong>${cr}</strong> créditos`;msg.className='aok';saveKey();checkKey();toast('remove.bg conectado ✓','success');}
+    else{msg.textContent='✕ API key inválida';msg.className='aerr';}}
+  catch(e){msg.textContent='✕ Error de conexión';msg.className='aerr';}
+}
+
+/* ── Generate ── */
+async function generate(){
+  if(S.mode==='libre'){
+    if(!S.lb.bgImg&&S.lb.players.length===0){toast('Sube al menos un fondo o jugador','error');return;}
+  } else if(S.images.length===0) return;
+  S.txtSz=parseInt(document.getElementById('slTxtSz')?.value||50);
+  setSt('Procesando...',true);prog(0,'Preparando...');await sl(80);
+  prog(35,'Componiendo...');await sl(120);prog(72,'Aplicando estilo...');await sl(100);prog(88,'Finalizando...');await sl(80);
+  await render();
+  prog(100,'¡Listo!');await sl(260);hideProg();
+  S.hasContent=true;
+  document.getElementById('emSt').style.display='none';document.getElementById('cW').style.display='';
+  document.getElementById('btnDl').disabled=false;
+  document.getElementById('s2').className='sd done';document.getElementById('s3').className='sd active';
+  setSt('Montaje listo');
+  const fmt=FMTS[S.format];
+  document.getElementById('cInfo').textContent=fmt.w+'×'+fmt.h+' px';document.getElementById('szI').textContent=fmt.label;
+  toast('Montaje generado ✓','success');
+}
+async function render(){
+  const fmt=FMTS[S.format];const W=fmt.w,H=fmt.h;
+  const cv=document.getElementById('mc');cv.width=W;cv.height=H;
+  const ctx=cv.getContext('2d');ctx.clearRect(0,0,W,H);
+  const vp=document.getElementById('cvp');
+  const dSc=Math.min((vp.clientWidth-52)/W,(vp.clientHeight-52)/H,1);
+  cv.style.width=Math.round(W*dSc)+'px';cv.style.height=Math.round(H*dSc)+'px';
+  if(S.mode==='individual')rIndividual(ctx,W,H);
+  else if(S.mode==='multifoto')rMulti(ctx,W,H);
+  else if(S.mode==='equipo')rEquipo(ctx,W,H);
+  else rLibre(ctx,W,H);
+}
+
+/* ══════════════════════════════════════════════════
+   MODO A — INDIVIDUAL
+   Silueta trasera MUY GRANDE (cubre todo + desborda)
+   Foto frontal 82% de alto anclada abajo
+   Texto en color acento
+══════════════════════════════════════════════════ */
+function rIndividual(ctx,W,H){
+  const imgs=S.images;
+  const ac=rc(S.acColor), sig=rc(S.sigColor);
+  const bgOpa=v('slBg')/100;
+  const isLight=S.bgColor==='#f0f0f5';
+  const sat=60+v('slSat')*0.7, con=85+v('slCon')*0.35;
+  const tStyle=document.getElementById('sTxt').value;
+  const txtSzF=(v('slMainSz')||50)/100;
+  const txtPosF=(v('slMainPos')||88)/100;
+
+  // ── 1. FONDO — dramático, tipo Champions/FIFA
+  paintBg(ctx,W,H);
+
+  // Diagonal lines (optional)
+  if(S.fx.lines){
+    ctx.save(); ctx.globalAlpha=isLight?0.038:0.032;
+    ctx.strokeStyle=isLight?'rgba(0,0,80,1)':'rgba(255,255,255,1)'; ctx.lineWidth=W*0.0008;
+    for(let i=-H;i<W+H;i+=W*0.055){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i+H*0.5,H);ctx.stroke();}
+    ctx.restore();
+  }
+
+  // ── 2. SILUETA TRASERA — 160% del canvas, muy diferenciada de la frontal
+  const back=imgs.length>=2?imgs[1].img:imgs[0]?.img;
+  if(back){
+    const sc=Math.max(W/back.width,H/back.height)*1.65;
+    const bw=back.width*sc, bh=back.height*sc;
+    const bx=(W-bw)/2, by=-bh*0.03;
+    ctx.save(); ctx.globalAlpha=bgOpa*0.70;
+    ctx.filter=`saturate(0.04) brightness(${isLight?1.3:0.48})`;
+    ctx.drawImage(back,bx,by,bw,bh); ctx.restore();
+
+    // Fade lateral izquierdo suave para dar profundidad
+    const col=isLight?'210,210,218':'8,8,16';
+    const fL=ctx.createLinearGradient(0,0,W*0.18,0);
+    fL.addColorStop(0,`rgba(${col},0.55)`); fL.addColorStop(1,`rgba(${col},0)`);
+    ctx.fillStyle=fL; ctx.fillRect(0,0,W*0.18,H);
+    // Fade inferior solo últimos 20%
+    const fb=ctx.createLinearGradient(0,H*0.80,0,H);
+    fb.addColorStop(0,`rgba(${col},0)`);
+    fb.addColorStop(0.5,`rgba(${col},0.60)`);
+    fb.addColorStop(1,`rgba(${col},1)`);
+    ctx.fillStyle=fb; ctx.fillRect(0,H*0.80,W,H*0.20);
+    // Fade top
+    const ft=ctx.createLinearGradient(0,0,0,H*0.04);
+    ft.addColorStop(0,`rgba(${col},0.35)`); ft.addColorStop(1,`rgba(${col},0)`);
+    ctx.fillStyle=ft; ctx.fillRect(0,0,W,H*0.04);
+  }
+
+  // ── 3. LUZ CENITAL
+  {const lG=ctx.createRadialGradient(W*0.5,0,0,W*0.5,H*0.38,H*0.88);
+  lG.addColorStop(0,isLight?'rgba(255,255,240,0.26)':'rgba(255,255,220,0.10)');
+  lG.addColorStop(1,'transparent'); ctx.fillStyle=lG; ctx.fillRect(0,0,W,H);}
+
+  // ── 4. TIPOGRAFÍA ENTRE CAPAS (solo si hay nombre)
+  const name=S.name.trim(), club=S.club.trim(), num=S.num.trim();
+  const parts=name?name.split(/\s+/):[];
+  const fname=parts[0]||'', lname=parts.slice(1).join(' ');
+  const bigWord=lname||fname;
+
+  if(num){
+    ctx.save(); ctx.font=`900 ${W*0.28}px 'Bebas Neue',sans-serif`;
+    ctx.fillStyle=isLight?'rgba(10,10,40,0.07)':'rgba(255,255,255,0.07)';
+    ctx.textAlign='right'; ctx.fillText(num,W*0.96,H*0.32); ctx.restore();
+  }
+  if(bigWord&&tStyle!=='clean'){
+    ctx.save();
+    if(fname&&lname){
+      ctx.font=`italic 300 ${W*0.085}px 'Playfair Display',Georgia,serif`;
+      ctx.fillStyle=isLight?'rgba(30,30,55,0.42)':'rgba(255,255,255,0.32)';
+      ctx.textAlign='left'; ctx.fillText(fname,W*0.07,H*0.62);
+    }
+    let bsz=W*0.35; ctx.textAlign='left';
+    ctx.font=`900 ${bsz}px 'Bebas Neue',sans-serif`;
+    while(ctx.measureText(bigWord).width>W*0.91&&bsz>W*0.08){bsz*=0.93;ctx.font=`900 ${bsz}px 'Bebas Neue',sans-serif`;}
+    ctx.fillStyle=isLight?'rgba(12,12,40,0.12)':'rgba(255,255,255,0.08)';
+    ctx.fillText(bigWord,W*0.04,H*0.825); ctx.restore();
+  }
+
+  // ── 5. FOTO FRONTAL — 88% de alto, anclada abajo
+  if(imgs.length>0){
+    const front=imgs[0].img;
+    let fh=H*0.88*pSz(), fw=fh*(front.width/front.height);
+    if(fw>W*0.96){fw=W*0.96; fh=fw*(front.height/front.width);}
+    const fx=(W-fw)/2, fy=H-fh;
+
+    // Halo detrás
+    const halo=ctx.createRadialGradient(W*0.5,fy+fh*0.22,0,W*0.5,fy+fh*0.22,fw*0.68);
+    halo.addColorStop(0,isLight?'rgba(255,255,240,0.32)':hexA(ac,0.10));
+    halo.addColorStop(1,'transparent'); ctx.fillStyle=halo; ctx.fillRect(0,0,W,H);
+
+    if(S.fx.light){
+      const rG=ctx.createLinearGradient(fx,fy+fh*0.2,fx+fw*0.3,fy+fh*0.6);
+      rG.addColorStop(0,isLight?'rgba(200,220,255,0.15)':hexA(ac,0.09));
+      rG.addColorStop(1,'transparent'); ctx.fillStyle=rG; ctx.fillRect(fx,fy,fw*0.5,fh);
+    }
+
+    ctx.save(); ctx.filter=`saturate(${sat}%) contrast(${con}%) brightness(1.06)`;
+    ctx.drawImage(front,fx,fy,fw,fh); ctx.restore();
+
+    if(S.fx.shadow){
+      ctx.save();
+      const sh=ctx.createRadialGradient(W*0.5,H,0,W*0.5,H,fw*0.5);
+      sh.addColorStop(0,'rgba(0,0,0,0.25)'); sh.addColorStop(1,'transparent');
+      ctx.fillStyle=sh; ctx.fillRect(0,H*0.88,W,H*0.12); ctx.restore();
+    }
+  }
+
+  // ── 6. TEXTO INFERIOR — integrado, sin panel/línea/caja
+  if(name||club||num){
+    // Gradiente de lectura muy suave solo donde está el texto
+    const col2=isLight?'210,210,218':'5,5,12';
+    const tG=ctx.createLinearGradient(0,H*0.87,0,H);
+    tG.addColorStop(0,`rgba(${col2},0)`);
+    tG.addColorStop(0.4,`rgba(${col2},0.45)`);
+    tG.addColorStop(1,`rgba(${col2},0.78)`);
+    ctx.fillStyle=tG; ctx.fillRect(0,H*0.87,W,H*0.13);
+
+    // Tamaño controlado por slider
+    const nameSz=W*(0.055+txtSzF*0.065);
+    const nameY=H*(0.888+txtPosF*0.096);
+    const subSz=W*0.026;
+    const subY=nameY+nameSz*0.62;
+
+    ctx.save(); ctx.textAlign='left';
+    ctx.shadowColor='rgba(0,0,0,0.8)'; ctx.shadowBlur=W*0.015;
+
+    if(tStyle==='clean'){
+      if(name){ctx.font=`300 ${W*0.038}px 'Barlow',sans-serif`;ctx.fillStyle=ac;ctx.fillText(name,W*0.05,nameY);}
+      if(club){ctx.font=`700 ${subSz}px 'Barlow Condensed',sans-serif`;ctx.fillStyle=sig;ctx.letterSpacing='3px';ctx.fillText(club,W*0.052,subY);}
+    } else if(tStyle==='bold'){
+      if(name){ctx.font=`900 ${nameSz*1.1}px 'Bebas Neue',sans-serif`;ctx.fillStyle=ac;ctx.fillText(name,W*0.04,nameY);}
+      if(club){ctx.font=`700 ${subSz}px 'Barlow Condensed',sans-serif`;ctx.fillStyle=sig;ctx.letterSpacing='5px';ctx.fillText(club,W*0.05,subY);}
+    } else {
+      if(name){ctx.font=`900 ${nameSz}px 'Bebas Neue',sans-serif`;ctx.fillStyle=ac;ctx.fillText(name,W*0.045,nameY);}
+      if(club){ctx.font=`600 ${subSz}px 'Barlow Condensed',sans-serif`;ctx.fillStyle=sig;ctx.letterSpacing='4px';ctx.fillText(club,W*0.048,subY);}
+      if(num){ctx.textAlign='right';ctx.font=`900 ${W*0.055}px 'Bebas Neue',sans-serif`;ctx.fillStyle=hexA(ac,0.22);ctx.fillText(num,W*0.96,subY);}
+    }
+    ctx.shadowBlur=0; ctx.restore();
+  }
+
+  if(S.fx.vignette){
+    const vig=ctx.createRadialGradient(W*0.5,H*0.44,H*0.15,W*0.5,H*0.44,W*0.92);
+    vig.addColorStop(0,'transparent'); vig.addColorStop(0.58,'transparent');
+    vig.addColorStop(1,isLight?'rgba(90,90,110,0.34)':'rgba(0,0,0,0.52)');
+    ctx.fillStyle=vig; ctx.fillRect(0,0,W,H);
+  }
+}
+
+
+function rMulti(ctx,W,H){
+  const imgs=S.images;
+  const ac=rc(S.acColor), sig=rc(S.sigColor);
+  const fxi=v('slFx')/100;
+  const sat=78+v('slSat')*0.38, con=92+v('slCon')*0.18;
+  const n=Math.min(imgs.length,4);
+
+  const hasBotText=!!(S.name);
+  const hasTopInfo=!!(S.myTeam||S.rival);
+  const botZone = hasBotText ? H*0.20 : 0;
+  const topZone = hasTopInfo ? H*0.16 : 0;
+  const midH = H - botZone - topZone;
+  const pTop = topZone;
+
+  // ── 1. FONDO Champions/FIFA style
+  paintBgStadium(ctx,W,H);
+
+  // Focos de estadio (3 puntos de luz desde arriba)
+  [0.2,0.5,0.8].forEach(xp=>{
+    const rG=ctx.createRadialGradient(W*xp,-H*0.08,0,W*xp,H*0.28,H*0.68);
+    rG.addColorStop(0,`rgba(255,255,210,${0.13+fxi*0.07})`);
+    rG.addColorStop(0.22,`rgba(255,245,180,${0.03+fxi*0.02})`);
+    rG.addColorStop(1,'transparent');
+    ctx.fillStyle=rG; ctx.fillRect(0,0,W,H);
+  });
+
+  // ── 2. INFO PARTIDO arriba
+  if(hasTopInfo){
+    const panG=ctx.createLinearGradient(0,0,0,topZone*1.4);
+    panG.addColorStop(0,'rgba(0,0,0,0.70)'); panG.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=panG; ctx.fillRect(0,0,W,topZone*1.4);
+    ctx.save(); ctx.textAlign='left'; ctx.shadowColor='rgba(0,0,0,0.9)'; ctx.shadowBlur=15;
+    if(S.myTeam){ctx.font=`900 ${W*0.060}px 'Barlow Condensed',sans-serif`;ctx.fillStyle='rgba(255,255,255,0.97)';ctx.fillText(S.myTeam,W*0.05,topZone*0.52);}
+    if(S.rival){
+      ctx.font=`700 ${W*0.034}px 'Barlow Condensed',sans-serif`;ctx.fillStyle=sig;ctx.fillText('VS',W*0.05,topZone*0.73);
+      ctx.font=`900 ${W*0.060}px 'Barlow Condensed',sans-serif`;ctx.fillStyle='rgba(255,255,255,0.97)';ctx.fillText(S.rival,W*0.05,topZone*0.94);
+    }
+    if(S.date){ctx.textAlign='right';ctx.font=`600 ${W*0.026}px 'Barlow Condensed',sans-serif`;ctx.fillStyle='rgba(255,255,255,0.72)';ctx.fillText(S.date,W*0.95,topZone*0.52);}
+    ctx.shadowBlur=0; ctx.restore();
+  }
+
+  // ── 3. JUGADORES — diseño organizado según número
+  if(n===1){
+    // Un solo jugador: centrado, llena todo
+    const p=imgs[0].img;
+    const ph=midH*1.04*pSz(), pw=ph*(p.width/p.height);
+    const px=Math.max(0,(W-pw)/2);
+    glow(ctx,W*0.5,pTop+midH*0.38,W*0.62,ac,0.16);
+    ctx.save(); ctx.filter=`saturate(${sat}%) contrast(${con}%) brightness(1.08)`;
+    ctx.drawImage(p,px,pTop-midH*0.02,Math.min(pw,W),ph); ctx.restore();
+
+  }else if(n===2){
+    // Dos jugadores: fondo al 80% + primero plano 70% a la derecha solapados
+    const p1=imgs[0].img, p2=imgs[1].img;
+    // p2 detrás, más grande, desplazado a la izquierda
+    const ph2=midH*0.98*pSz(), pw2=ph2*(p2.width/p2.height);
+    glow(ctx,W*0.28,pTop+midH*0.4,pw2*0.55,ac,0.10);
+    ctx.save(); ctx.filter=`saturate(${sat*0.88}%) contrast(${con}%) brightness(0.88)`;
+    ctx.drawImage(p2,-pw2*0.12,pTop,pw2,ph2); ctx.restore();
+    // p1 delante, más pequeño, derecha
+    const ph1=midH*0.92*pSz(), pw1=ph1*(p1.width/p1.height);
+    glow(ctx,W*0.72,pTop+midH*0.38,pw1*0.55,ac,0.16);
+    ctx.save(); ctx.filter=`saturate(${sat}%) contrast(${con}%) brightness(1.06)`;
+    ctx.drawImage(p1,W-pw1+pw1*0.08,pTop+midH*0.04,pw1,ph1); ctx.restore();
+
+  }else if(n===3){
+    // Tres: central grande + dos laterales más pequeños
+    const pc=imgs[0].img;
+    const phC=midH*0.94*pSz(), pwC=phC*(pc.width/pc.height);
+    glow(ctx,W*0.5,pTop+midH*0.36,pwC*0.72,ac,0.17);
+    ctx.save(); ctx.filter=`saturate(${sat}%) contrast(${con}%) brightness(1.07)`;
+    ctx.drawImage(pc,(W-pwC)/2,pTop+midH*0.02,pwC,phC); ctx.restore();
+    // Fade integración laterales
+    const fL=ctx.createLinearGradient(0,pTop+midH*0.12,0,pTop+midH*0.55);
+    fL.addColorStop(0,'transparent'); fL.addColorStop(1,'rgba(0,0,0,0.48)');
+    ctx.fillStyle=fL; ctx.fillRect(0,pTop+midH*0.12,W,midH*0.44);
+
+    const pL=imgs[1].img, pR=imgs[2].img;
+    const phS=midH*0.72*pSz(), pwL=phS*(pL.width/pL.height), pwR=phS*(pR.width/pR.height);
+    ctx.save(); ctx.filter=`saturate(${sat*0.85}%) contrast(${con}%) brightness(0.88)`;
+    ctx.drawImage(pL,-pwL*0.15,pTop+midH*0.28,pwL,phS); ctx.restore();
+    ctx.save(); ctx.filter=`saturate(${sat*0.85}%) contrast(${con}%) brightness(0.88)`;
+    ctx.drawImage(pR,W-pwR*0.85,pTop+midH*0.28,pwR,phS); ctx.restore();
+
+  }else{
+    // Cuatro: central muy grande + tres satélites debajo
+    const pc=imgs[0].img;
+    const phC=midH*0.78*pSz(), pwC=phC*(pc.width/pc.height);
+    glow(ctx,W*0.5,pTop+midH*0.28,pwC*0.72,ac,0.17);
+    ctx.save(); ctx.filter=`saturate(${sat}%) contrast(${con}%) brightness(1.07)`;
+    ctx.drawImage(pc,(W-pwC)/2,pTop,pwC,phC); ctx.restore();
+    const ov=ctx.createLinearGradient(0,pTop+phC*0.58,0,pTop+phC*0.86);
+    ov.addColorStop(0,'transparent'); ov.addColorStop(1,'rgba(0,0,0,0.55)');
+    ctx.fillStyle=ov; ctx.fillRect(0,pTop+phC*0.58,W,phC*0.28);
+
+    const satW=W*0.30, rowY=pTop+phC*0.42;
+    [imgs[1],imgs[2],imgs[3]].forEach((img,i)=>{
+      const ph2=satW*(img.img.height/img.img.width);
+      const cx=satW*i+(W-satW*3)/2+satW*(i+0.5);
+      ctx.save(); ctx.filter=`saturate(${sat*0.82}%) contrast(${con}%) brightness(0.88)`;
+      ctx.drawImage(img.img,cx-satW/2,rowY,satW,ph2); ctx.restore();
+    });
+  }
+
+  // Vignette más intensa en bordes para dar profundidad
+  const vig=ctx.createRadialGradient(W*0.5,pTop+midH*0.42,midH*0.08,W*0.5,pTop+midH*0.42,W*0.92);
+  vig.addColorStop(0,'transparent'); vig.addColorStop(0.5,'transparent');
+  vig.addColorStop(1,'rgba(0,0,3,0.62)');
+  ctx.fillStyle=vig; ctx.fillRect(0,0,W,H);
+
+  // ── 4. TEXTO INFERIOR (solo si existe)
+  if(hasBotText){
+    const btmY=H-botZone;
+    const btmG=ctx.createLinearGradient(0,btmY-botZone*0.4,0,H);
+    btmG.addColorStop(0,'rgba(0,0,0,0)'); btmG.addColorStop(0.28,getBgDark(0.72)); btmG.addColorStop(1,getBgDark(0.97));
+    ctx.fillStyle=btmG; ctx.fillRect(0,btmY-botZone*0.4,W,H-btmY+botZone*0.4);
+
+    ctx.save(); ctx.textAlign='center'; ctx.shadowColor='rgba(0,0,0,0.7)'; ctx.shadowBlur=20;
+    let bsz=W*(0.14+(v('slMainSz')||38)/100*0.36);
+    ctx.font=`900 ${bsz}px 'Bebas Neue',sans-serif`;
+    while(ctx.measureText(S.name).width>W*0.95&&bsz>30){bsz*=0.93;ctx.font=`900 ${bsz}px 'Bebas Neue',sans-serif`;}
+    const txtY=btmY+botZone*((v('slMainPos')||88)/100);
+    ctx.shadowColor=ac; ctx.shadowBlur=W*0.04;
+    ctx.fillStyle='rgba(255,255,255,0.07)'; ctx.fillText(S.name,W*0.5,txtY);
+    ctx.shadowBlur=W*0.018; ctx.fillStyle=ac; ctx.fillText(S.name,W*0.5,txtY);
+    ctx.shadowBlur=0;
+    if(S.league){ctx.font=`500 ${W*0.024}px 'Barlow Condensed',sans-serif`;ctx.letterSpacing='7px';ctx.fillStyle='rgba(255,255,255,0.36)';ctx.fillText(S.league,W*0.5,H-H*0.006);}
+    ctx.restore();
+  }
+}
+
+
+function rEquipo(ctx,W,H){
+  const imgs=S.images;
+  const ac=rc(S.acColor),sig=rc(S.sigColor);
+  const n=Math.min(imgs.length,6);
+  const sat=90+v('slSat')*0.18,con=100+v('slCon')*0.06;
+  const txtSzFactor=(v('slMainSz')||50)/100;
+  const txtPosFactor=(v('slMainPos')||88)/100;
+
+  // Fondo de usuario
+  paintBg(ctx,W,H);
+  const isLightBgEq=S.bgColor==='#f0f0f5'||S.bgColor==='#d5d5de';
+  ctx.fillStyle=`rgba(0,0,0,${isLightBgEq?0.08:0.22})`;ctx.fillRect(0,0,W,H);
+
+  if(n===0)return;
+
+  const hasCursive=!!(S.cv1||S.cv2);
+  const hasBot=!!(S.name||S.club);
+  const slices=Math.min(n,3);
+
+  // Distribuir altura:
+  // - Si hay texto cursivo: cada separador entre franjas tiene una "banda" de texto
+  // - Panel inferior de nombre: fijo abajo
+  // Clave: texto NUNCA sobre las fotos, sino en zonas negras propias
+  const botH=hasBot?H*0.10:0;
+
+  // Banda entre franjas para texto cursivo
+  const cursiveBandH=hasCursive?H*0.055:0;
+  const nSeparators=slices-1;
+  // Las fotos deben cubrir EXACTAMENTE el espacio disponible sin dejar negro
+  const availH=H-botH;
+  const photoH=(availH-cursiveBandH*nSeparators)/slices;
+
+  // Dibujar franjas + separadores con texto
+  for(let i=0;i<slices;i++){
+    // Posición Y de esta franja: suma de franjas previas + separadores previos
+    const sy=i*(photoH+cursiveBandH);
+    const img=imgs[i].img;
+
+    // Franja de foto
+    ctx.save();ctx.beginPath();ctx.rect(0,sy,W,photoH);ctx.clip();
+    ctx.filter=`saturate(${sat}%) contrast(${con}%) brightness(0.97)`;
+    coverCenter(ctx,img,0,sy,W,photoH);
+    ctx.restore();
+
+    // Viñeta interna de la franja (oscurecer bordes para integrar)
+    const vigF=ctx.createLinearGradient(0,sy,0,sy+photoH);
+    vigF.addColorStop(0,'rgba(0,0,0,0.3)');
+    vigF.addColorStop(0.15,'rgba(0,0,0,0)');
+    vigF.addColorStop(0.85,'rgba(0,0,0,0)');
+    vigF.addColorStop(1,'rgba(0,0,0,0.3)');
+    ctx.fillStyle=vigF;ctx.fillRect(0,sy,W,photoH);
+
+    // Separador con texto cursivo (entre franjas, si hay)
+    if(i<slices-1 && hasCursive){
+      const sepY=sy+photoH;
+      const curText=i===0?S.cv1:S.cv12;
+      // Fondo del separador — color del fondo del usuario
+      ctx.fillStyle=isLightBgEq?'rgba(240,240,245,0.96)':'rgba(8,8,14,0.96)';
+      ctx.fillRect(0,sepY,W,cursiveBandH);
+
+      // Líneas decorativas dentro del separador
+      if(S.fx.lines){
+        const lG=ctx.createLinearGradient(0,0,W,0);
+        lG.addColorStop(0,'transparent');lG.addColorStop(0.08,hexA(sig,0.6));lG.addColorStop(0.92,hexA(sig,0.6));lG.addColorStop(1,'transparent');
+        ctx.fillStyle=lG;ctx.fillRect(0,sepY,W,H*0.002);
+        ctx.fillStyle=lG;ctx.fillRect(0,sepY+cursiveBandH-H*0.002,W,H*0.002);
+      }
+
+      if(curText){
+        // Texto cursivo centrado dentro del separador
+        const cursiveSz=W*(0.062+txtSzFactor*0.04);
+        ctx.save();
+        ctx.font=`italic 700 ${cursiveSz}px 'Playfair Display',Georgia,serif`;
+        ctx.textAlign='center';
+        ctx.fillStyle=isLightBgEq?'rgba(20,20,40,0.9)':'rgba(255,255,255,0.94)';
+        ctx.shadowColor='rgba(0,0,0,0.4)';ctx.shadowBlur=8;
+        ctx.fillText(curText,W*0.5,sepY+cursiveBandH*0.72);
+        ctx.shadowBlur=0;ctx.restore();
+      }
+    }
+  }
+
+  // Mini collage si hay >3 fotos
+  if(n>3&&slices>=3){
+    const lsy=2*(photoH+cursiveBandH);const mw=W/Math.min(n-3,3);
+    const extras=imgs.slice(3,Math.min(n,6));
+    ctx.save();
+    const extraH=photoH*0.5;
+    // Fondo extra
+    ctx.fillStyle='rgba(0,0,0,0.3)';ctx.fillRect(0,lsy,W,extraH);
+    extras.forEach((it,j)=>{
+      ctx.save();ctx.beginPath();ctx.rect(j*mw+1,lsy,mw-2,extraH);ctx.clip();
+      ctx.filter=`saturate(${sat*0.9}%) contrast(${con}%)`;
+      coverCenter(ctx,it.img,j*mw,lsy,mw,extraH);ctx.restore();
+      ctx.fillStyle='rgba(0,0,0,0.45)';ctx.fillRect(j*mw,lsy,2,extraH);
+    });
+    ctx.restore();
+  }
+
+  // Panel inferior de nombre — SIEMPRE fuera de las fotos, zona propia
+  if(hasBot){
+    const panY=H-botH;
+    // Fondo del panel en el color de fondo del usuario
+    ctx.fillStyle=isLightBgEq?'rgba(238,238,246,0.98)':'rgba(5,5,12,0.98)';
+    ctx.fillRect(0,panY,W,botH);
+    // Barra de color
+    if(S.fx.lines){
+      const lG=ctx.createLinearGradient(0,0,W,0);
+      lG.addColorStop(0,'transparent');lG.addColorStop(0.08,hexA(sig,0.85));lG.addColorStop(0.92,hexA(sig,0.85));lG.addColorStop(1,'transparent');
+      ctx.fillStyle=lG;ctx.fillRect(0,panY,W,H*0.003);
+    }
+    ctx.save();ctx.textAlign='left';
+    const nameSzEq=W*(0.055+txtSzFactor*0.06);
+    const nameYEq=panY+botH*(0.45+txtPosFactor*0.35);
+    if(S.name){
+      ctx.font=`700 ${nameSzEq}px 'Bebas Neue',sans-serif`;
+      ctx.fillStyle=ac; // color acento aplicado correctamente
+      ctx.fillText(S.name,W*0.05,nameYEq);
+    }
+    if(S.club){
+      ctx.font=`400 ${W*0.025}px 'Barlow',sans-serif`;
+      ctx.fillStyle=hexA(sig,0.9);ctx.letterSpacing='5px';
+      ctx.fillText(S.club,W*0.055,nameYEq+botH*0.28);
+    }
+    ctx.restore();
+  }
+
+  if(S.fx.vignette){
+    const vig=ctx.createRadialGradient(W*0.5,H*0.5,H*0.32,W*0.5,H*0.5,W*0.92);
+    vig.addColorStop(0,'transparent');vig.addColorStop(1,'rgba(0,0,0,0.22)');
+    ctx.fillStyle=vig;ctx.fillRect(0,0,W,H);
+  }
+}
+
+
+function glow(ctx,cx,cy,r,color,alpha){const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,hexA(color,alpha));g.addColorStop(0.5,hexA(color,alpha*0.35));g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);}
+
+function coverFill(ctx,img,x,y,w,h){
+  // Centrado perfecto: la imagen siempre llena la zona sin bordes y centrada
+  const ir=img.width/img.height,br=w/h;
+  let dw,dh,dx,dy;
+  if(ir>br){
+    // Imagen más ancha que la zona: ajustar por alto, centrar horizontal
+    dh=h;dw=dh*ir;
+    dx=x-(dw-w)/2;dy=y;
+  }else{
+    // Imagen más alta que la zona: ajustar por ancho, centrar vertical
+    dw=w;dh=dw/ir;
+    dx=x;dy=y-(dh-h)/2; // centrado vertical exacto
+  }
+  ctx.drawImage(img,dx,dy,dw,dh);
+}
+function coverCenter(ctx,img,x,y,w,h){
+  // Cover con centrado vertical exacto (no offset hacia arriba)
+  const ir=img.width/img.height,br=w/h;
+  let dw,dh,dx,dy;
+  if(ir>br){dh=h;dw=dh*ir;dx=x-(dw-w)/2;dy=y;}
+  else{dw=w;dh=dw/ir;dx=x;dy=y-(dh-h)/2;}
+  ctx.drawImage(img,dx,dy,dw,dh);
+}
+
+function paintBg(ctx,W,H){
+  const bg=S.bgColor;
+
+  if(bg==='#f0f0f5'){
+    const g=ctx.createRadialGradient(W*0.5,H*0.25,0,W*0.5,H*0.6,W*1.05);
+    g.addColorStop(0,'#e8e8ee');g.addColorStop(0.5,'#d0d0da');g.addColorStop(1,'#adadbd');
+    ctx.fillStyle=g;
+
+  }else if(bg==='#111111'){
+    const g=ctx.createRadialGradient(W*0.5,H*0.3,0,W*0.5,H*0.5,W*0.9);
+    g.addColorStop(0,'#1e1e28');g.addColorStop(0.5,'#0e0e18');g.addColorStop(1,'#040408');
+    ctx.fillStyle=g;
+
+  }else if(bg==='#1a2a5e'){
+    const g=ctx.createRadialGradient(W*0.5,H*0.28,0,W*0.5,H*0.55,W*1.0);
+    g.addColorStop(0,'#2a4a8e');g.addColorStop(0.45,'#142268');g.addColorStop(1,'#060e30');
+    ctx.fillStyle=g;
+
+  }else if(bg==='grad_blue'){
+    // Champions premium
+    const g=ctx.createRadialGradient(W*0.5,H*0.22,0,W*0.5,H*0.5,W*1.1);
+    g.addColorStop(0,'#1e3a8a');g.addColorStop(0.35,'#0f1e5e');g.addColorStop(0.7,'#060e2e');g.addColorStop(1,'#020612');
+    ctx.fillStyle=g;
+
+  }else if(bg==='grad_dark'){
+    const g=ctx.createRadialGradient(W*0.5,H*0.22,0,W*0.5,H*0.55,W*1.0);
+    g.addColorStop(0,'#1e1e2e');g.addColorStop(0.4,'#10101e');g.addColorStop(1,'#040408');
+    ctx.fillStyle=g;
+
+  }else if(bg==='grad_red'){
+    const g=ctx.createRadialGradient(W*0.5,H*0.22,0,W*0.5,H*0.55,W*1.0);
+    g.addColorStop(0,'#5a1018');g.addColorStop(0.4,'#2e060a');g.addColorStop(1,'#0e0204');
+    ctx.fillStyle=g;
+
+  }else if(bg==='grad_green'){
+    const g=ctx.createRadialGradient(W*0.5,H*0.22,0,W*0.5,H*0.55,W*1.0);
+    g.addColorStop(0,'#0e3a18');g.addColorStop(0.4,'#061e0a');g.addColorStop(1,'#020a04');
+    ctx.fillStyle=g;
+
+  }else if(bg==='grad_purple'){
+    const g=ctx.createRadialGradient(W*0.5,H*0.22,0,W*0.5,H*0.55,W*1.0);
+    g.addColorStop(0,'#2e1060');g.addColorStop(0.4,'#180840');g.addColorStop(1,'#06020e');
+    ctx.fillStyle=g;
+
+  }else{ctx.fillStyle=bg;}
+  ctx.fillRect(0,0,W,H);
+
+  // Spotlight suave en todos los fondos oscuros
+  if(bg!=='#f0f0f5'){
+    const sp=ctx.createRadialGradient(W*0.5,0,0,W*0.5,H*0.38,W*0.85);
+    sp.addColorStop(0,'rgba(255,255,255,0.065)');
+    sp.addColorStop(0.3,'rgba(255,255,255,0.02)');
+    sp.addColorStop(1,'transparent');
+    ctx.fillStyle=sp; ctx.fillRect(0,0,W,H);
+  }
+}
+
+
+function paintBgStadium(ctx,W,H){
+  const bg=S.bgColor;
+  // Si el usuario eligió un color personalizado, usarlo como base oscurecida
+  if(bg==='#f0f0f5'||bg==='#d5d5de'){ctx.fillStyle='#0a0e1a';ctx.fillRect(0,0,W,H);}
+  else if(bg.startsWith('grad')){
+    const G={grad_blue:['#030818','#061030'],grad_dark:['#040406','#0a0a14'],grad_red:['#120306','#220508'],grad_green:['#031204','#061e06']};
+    const [ca,cb]=G[bg]||['#030818','#061030'];
+    const g=ctx.createRadialGradient(W*0.5,H*0.18,0,W*0.5,H*0.3,W*1.08);
+    g.addColorStop(0,cb);g.addColorStop(0.45,ca);g.addColorStop(1,ca);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  }else{
+    // Color sólido del usuario: oscurecer para estadio
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='rgba(0,0,0,0.45)';ctx.fillRect(0,0,W,H);
+  }
+  // Ondas concéntricas
+  ctx.save();ctx.globalAlpha=0.06;
+  ctx.strokeStyle=S.bgColor==='grad_red'?'rgba(255,80,80,1)':S.bgColor==='grad_green'?'rgba(80,255,80,1)':'rgba(80,130,255,1)';
+  ctx.lineWidth=W*0.0008;
+  for(let i=0;i<16;i++){ctx.beginPath();ctx.arc(W*0.5,H*0.18,W*(0.14+i*0.09),0,Math.PI*2);ctx.stroke();}
+  ctx.restore();
+}
+
+function getBgDark(a=1){const bg=S.bgColor;if(bg==='grad_red')return `rgba(12,3,6,${a})`;if(bg==='grad_green')return `rgba(3,10,4,${a})`;return `rgba(3,8,26,${a})`;}
+function rc(c){if(c==='gold')return '#d4a840';if(c==='silver')return '#c0c0c8';if(c==='chrome')return '#5a8aee';if(c==='transparent')return 'rgba(0,0,0,0)';return c||'#ffffff';}
+function hexA(hex,alpha){let h=(hex||'#fff').replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');if(h.length!==6)return `rgba(255,255,255,${alpha})`;return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${alpha})`;}
+function v(id){return parseInt(document.getElementById(id)?.value||0);}
+function pSz(){return (parseInt(document.getElementById('slPlayerSz')?.value)||100)/100;}
+
+/* ── Download ── */
+function toggleDl(){document.getElementById('dlP').classList.toggle('open');}
+document.addEventListener('click',e=>{if(!e.target.closest('.dlw'))document.getElementById('dlP').classList.remove('open');});
+function dlAs(type){
+  const cv=document.getElementById('mc');const fmt=FMTS[S.format];const fn=(S.name||'sportframe')+'_'+fmt.w+'x'+fmt.h;
+  document.getElementById('dlP').classList.remove('open');
+  if(type==='jpg')tDl(cv.toDataURL('image/jpeg',0.93),fn+'.jpg');
+  else if(type==='png')tDl(cv.toDataURL('image/png'),fn+'.png');
+  else{const c2=document.createElement('canvas');c2.width=cv.width*2;c2.height=cv.height*2;c2.getContext('2d').drawImage(cv,0,0,c2.width,c2.height);tDl(c2.toDataURL('image/png'),fn+'_2x.png');}
+  toast('Descargando '+fn,'success');
+}
+function tDl(url,name){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);}
+
+/* ── Misc ── */
+function prog(p,l){document.getElementById('pOv').classList.add('vis');document.getElementById('pF').style.width=p+'%';document.getElementById('pS').textContent=l;}
+function hideProg(){document.getElementById('pOv').classList.remove('vis');}
+function sl(ms){return new Promise(r=>setTimeout(r,ms));}
+function setSt(t,proc=false){document.getElementById('stT').textContent=t;document.getElementById('stD').className='sd2 '+(proc?'proc':'ready');}
+function resetApp(){
+  S.images=[];S.hasContent=false;S.name=S.club=S.num=S.myTeam=S.rival=S.date=S.league=S.cv1=S.cv2='';
+  ['iName','iClub','iNum','iMyT','iRiv','iDate','iLeag','iCv1','iCv2'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('tg').innerHTML='';
+  const rb=document.getElementById('rabBtn');if(rb)rb.style.display='none';
+  clearCanvas();updateGenBtn();updateCnt();
+  document.getElementById('s2').className='sd';document.getElementById('s3').className='sd';
+  // Reset libre state
+  S.lb={bgImg:null,bgUrl:null,players:[],badges:[],acColor:'#ffffff',sigColor:'#cc1122'};
+  const lbPr=document.getElementById('lbBgPrev');if(lbPr)lbPr.innerHTML='<span style="font-size:11px;color:var(--mt)">Toca para subir fondo</span>';
+  ['lbPlayerGrid','lbBadgeGrid'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});
+  ['lbTeam0','lbTeam1','lbLeague','lbTxt0','lbTxt1','lbTxt2','lbVenue'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  toast('Proyecto reiniciado');
+}
+function clearCanvas(){S.hasContent=false;document.getElementById('emSt').style.display='';document.getElementById('cW').style.display='none';document.getElementById('btnDl').disabled=true;document.getElementById('cInfo').textContent='Sin contenido';document.getElementById('szI').textContent='—';}
+function zoomFit(){if(S.hasContent)render();}
+function toast(msg,type=''){const t=document.getElementById('toast');document.getElementById('tMsg').textContent=msg;document.getElementById('tIco').textContent=type==='success'?'✓':type==='error'?'✕':'ℹ';t.className='toast show '+(type||'');clearTimeout(t._t);t._t=setTimeout(()=>{t.className='toast'},2800);}
+
+/* ════════════════════════════════════════════════════
+   MODO LIBRE — State & Helpers
+════════════════════════════════════════════════════ */
+// S.lb already initialized in S state
+
+function lbLoadBg(e){
+  const f=e.target.files[0];if(!f)return;
+  const fr=new FileReader();fr.onload=ev=>{
+    imgFromURL(ev.target.result).then(img=>{
+      S.lb.bgImg=img;S.lb.bgUrl=ev.target.result;
+      const pr=document.getElementById('lbBgPrev');
+      pr.innerHTML=`<img src="${ev.target.result}" style="width:100%;height:44px;object-fit:cover;border-radius:5px;display:block">`;
+      updateGenBtn();
+      if(S.mode==='libre')document.getElementById('btnGen').disabled=false;
+      if(S.hasContent)scheduleRender();
+    });
+  };fr.readAsDataURL(f);
+}
+
+function lbLoadPlayers(e){
+  Array.from(e.target.files).slice(0,4-S.lb.players.length).forEach(f=>{
+    const fr=new FileReader();fr.onload=ev=>{
+      imgFromURL(ev.target.result).then(img=>{
+        const idx=S.lb.players.length;
+        const xs=[0.28,0.72,0.18,0.82];
+        const entry={img,url:ev.target.result,originalUrl:ev.target.result,sz:55,x:xs[idx]||0.5,y:0.5,removing:false,removed:false,file:f};
+        S.lb.players.push(entry);
+        lbRebuildGrid('lbPlayerGrid',S.lb.players,'player');
+        updateGenBtn();
+        if(S.mode==='libre')document.getElementById('btnGen').disabled=false;
+        if(S.hasContent)scheduleRender();
+        // Auto remove background if API key set
+        const key=document.getElementById('aKey').value.trim();
+        if(key.length>8){
+          const pidx=S.lb.players.indexOf(entry);
+          if(pidx>=0)lbRemoveBg(S.lb.players,pidx,'lbPlayerGrid');
+        }
+      });
+    };fr.readAsDataURL(f);
+  });e.target.value='';
+}
+
+function lbLoadBadges(e){
+  Array.from(e.target.files).slice(0,2-S.lb.badges.length).forEach(f=>{
+    const fr=new FileReader();fr.onload=ev=>{
+      imgFromURL(ev.target.result).then(img=>{
+        const idx=S.lb.badges.length;
+        const entry={img,url:ev.target.result,originalUrl:ev.target.result,sz:18,x:idx===0?0.12:0.88,y:0.1,removing:false,removed:false,file:f};
+        S.lb.badges.push(entry);
+        lbRebuildGrid('lbBadgeGrid',S.lb.badges,'badge');
+        if(S.hasContent)scheduleRender();
+        // Auto remove background if API key set
+        const key=document.getElementById('aKey').value.trim();
+        if(key.length>8){
+          const bidx=S.lb.badges.indexOf(entry);
+          if(bidx>=0)lbRemoveBg(S.lb.badges,bidx,'lbBadgeGrid');
+        }
+      });
+    };fr.readAsDataURL(f);
+  });e.target.value='';
+}
+
+function lbRebuildGrid(gridId,arr,type){
+  const g=document.getElementById(gridId);g.innerHTML='';
+  const key=document.getElementById('aKey').value.trim();
+  // Show/hide cut all button
+  if(gridId==='lbPlayerGrid'){
+    const cab=document.getElementById('lbCutAllBtn');
+    if(cab){
+      const needsCut=arr.some(x=>!x.removed&&!x.removing);
+      cab.style.display=(key.length>8&&arr.length>0&&needsCut)?'':'none';
+    }
+  }
+  arr.forEach((item,i)=>{
+    const wrap=document.createElement('div');
+    wrap.style.cssText='position:relative;border-radius:6px;overflow:hidden;border:1.5px solid var(--bd);background:var(--sf)';
+    if(item.removing)wrap.style.opacity='0.55';
+
+    const im=document.createElement('img');im.src=item.url;im.style.cssText='width:100%;aspect-ratio:1;object-fit:cover;display:block';wrap.appendChild(im);
+
+    // Status badge
+    if(item.removing){
+      const sb=document.createElement('div');
+      sb.style.cssText='position:absolute;top:2px;left:2px;background:rgba(0,0,0,.75);border-radius:4px;padding:1px 5px;font-size:8px;color:#fff';
+      sb.textContent='✂️ Recortando...';wrap.appendChild(sb);
+    } else if(item.removed){
+      const sb=document.createElement('div');
+      sb.style.cssText='position:absolute;top:2px;left:2px;background:rgba(0,200,100,.88);border-radius:4px;padding:1px 5px;font-size:8px;color:#000;font-weight:700';
+      sb.textContent='✓ Recortado';wrap.appendChild(sb);
+    }
+
+    // Manual cut button (if API key and not already cut/cutting)
+    if(key.length>8&&!item.removed&&!item.removing){
+      const cb=document.createElement('button');
+      cb.style.cssText='position:absolute;bottom:30px;left:2px;background:rgba(0,0,0,.75);border:none;border-radius:3px;color:#fff;font-size:8px;padding:2px 5px;cursor:pointer';
+      cb.textContent='✂️ Recortar';
+      cb.onclick=()=>lbRemoveBg(arr,i,gridId);
+      wrap.appendChild(cb);
+    }
+
+    // Controls
+    const ctr=document.createElement('div');ctr.style.cssText='padding:4px 5px;background:var(--dk);display:flex;flex-direction:column;gap:2px';
+    [
+      {label:'Tamaño',key:'sz',min:5,max:100},
+      {label:'X (←→)',key:'x',min:0,max:100,pct:true},
+      {label:'Y (↑↓)',key:'y',min:0,max:100,pct:true}
+    ].forEach(ctrl=>{
+      const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:4px';
+      const lab=document.createElement('span');lab.style.cssText='font-size:7px;color:var(--td);width:36px;flex-shrink:0';lab.textContent=ctrl.label;
+      const inp=document.createElement('input');inp.type='range';inp.min=ctrl.min;inp.max=ctrl.max;
+      inp.value=ctrl.pct?Math.round(item[ctrl.key]*100):item[ctrl.key];
+      inp.style.cssText='flex:1;height:2px';
+      inp.oninput=()=>{item[ctrl.key]=ctrl.pct?inp.value/100:parseInt(inp.value);if(S.hasContent)scheduleRender();};
+      row.appendChild(lab);row.appendChild(inp);ctr.appendChild(row);
+    });
+    wrap.appendChild(ctr);
+
+    // Delete button
+    const del=document.createElement('button');
+    del.style.cssText='position:absolute;top:2px;right:2px;width:15px;height:15px;background:var(--a2);border:none;border-radius:50%;color:#fff;font-size:9px;cursor:pointer';
+    del.textContent='×';del.onclick=()=>{arr.splice(i,1);lbRebuildGrid(gridId,arr,type);if(S.hasContent)scheduleRender();};
+    wrap.appendChild(del);g.appendChild(wrap);
+  });
+}
+
+/* ── lbRemoveBg: remove.bg for libre mode items ── */
+async function lbRemoveBg(arr, idx, gridId){
+  const entry=arr[idx];
+  if(!entry||entry.removing)return;
+  const key=document.getElementById('aKey').value.trim();
+  if(!key||key.length<8){toast('Añade tu API key de remove.bg primero','error');return;}
+
+  entry.removing=true;
+  lbRebuildGrid(gridId,arr,'item');
+
+  try{
+    // Fetch the original image as blob
+    const resp=await fetch(entry.originalUrl||entry.url);
+    const blob=await resp.blob();
+    const fd=new FormData();
+    fd.append('image_file',blob,entry.file?.name||'image.jpg');
+    fd.append('size','auto');
+
+    const r=await new Promise((resolve,reject)=>{
+      const xhr=new XMLHttpRequest();
+      xhr.open('POST','https://api.remove.bg/v1.0/removebg',true);
+      xhr.setRequestHeader('X-Api-Key',key);
+      xhr.responseType='blob';
+      xhr.onload=()=>resolve({ok:xhr.status===200,status:xhr.status,blob:()=>Promise.resolve(xhr.response),json:()=>new Promise(res=>{const fr=new FileReader();fr.onload=ev=>{try{res(JSON.parse(ev.target.result));}catch(ex){res({errors:[{title:'Parse error'}]});}};fr.readAsText(xhr.response);})});
+      xhr.onerror=()=>reject(new Error('Sin conexion'));
+      xhr.timeout=30000;xhr.ontimeout=()=>reject(new Error('Timeout'));
+      xhr.send(fd);
+    });
+
+    if(!r.ok){
+      const er=await r.json().catch(()=>({errors:[{title:'Error'}]}));
+      throw new Error(er.errors?.[0]?.title||'HTTP '+r.status);
+    }
+
+    const rb=await r.blob();
+    const ru=URL.createObjectURL(rb);
+    const ri=await imgFromURL(ru);
+
+    entry.img=ri;
+    entry.url=ru;
+    entry.removed=true;
+    entry.removing=false;
+
+    lbRebuildGrid(gridId,arr,'item');
+    toast('✂️ Fondo eliminado','success');
+    if(S.hasContent)scheduleRender();
+
+  }catch(err){
+    entry.removing=false;
+    lbRebuildGrid(gridId,arr,'item');
+    toast('remove.bg: '+err.message,'error');
+  }
+}
+
+function setLbAc(el){document.querySelectorAll('[data-lbac]').forEach(x=>x.classList.remove('active'));el.classList.add('active');S.lb.acColor=el.dataset.lbac;if(S.hasContent)scheduleRender();}
+function setLbSig(el){document.querySelectorAll('[data-lbsig]').forEach(x=>x.classList.remove('active'));el.classList.add('active');S.lb.sigColor=el.dataset.lbsig;if(S.hasContent)scheduleRender();}
+
+/* ════════════════════════════════════════════════════
+   RENDER LIBRE
+════════════════════════════════════════════════════ */
+function rLibre(ctx,W,H){
+  const lb=S.lb; if(!lb) return;
+  const ac  = rc(lb.acColor);
+  const sig = rc(lb.sigColor);
+  const bgOpa  = (parseInt(document.getElementById('lbBgOpa')?.value)||100)/100;
+  const txtSzF = (parseInt(document.getElementById('lbTxtSz')?.value)||50)/100;
+  const txtPosF= (parseInt(document.getElementById('lbTxtPos')?.value)||35)/100;
+  const layout = document.getElementById('lbLayout')?.value||'two_sides';
+  const fStyle = document.getElementById('lbFont')?.value||'bebas';
+
+  const t0     = (document.getElementById('lbTeam0')?.value.trim().toUpperCase())||'';
+  const t1     = (document.getElementById('lbTeam1')?.value.trim().toUpperCase())||'';
+  const league = (document.getElementById('lbLeague')?.value.trim())||'';
+  const txtBig = (document.getElementById('lbTxt0')?.value.trim().toUpperCase())||'';
+  const date   = (document.getElementById('lbTxt1')?.value.trim())||'';
+  const time   = (document.getElementById('lbTxt2')?.value.trim())||'';
+  const venue  = (document.getElementById('lbVenue')?.value.trim().toUpperCase())||'';
+
+  // Transparent color means nothing is drawn for text
+  const acIsTransparent = lb.acColor==='transparent';
+  const sigIsTransparent= lb.sigColor==='transparent';
+
+  function FM(sz){
+    const f=fStyle==='barlow'?`'Barlow Condensed',sans-serif`
+           :fStyle==='playfair'?`'Playfair Display',serif`
+           :`'Bebas Neue',sans-serif`;
+    return `900 ${sz}px ${f}`;
+  }
+  function FC(sz){ return `700 ${sz}px 'Barlow Condensed',sans-serif`; }
+
+  /* ── Dynamic zone calculation ──
+     TOP: only if there's match info (liga/fecha/hora/campo)
+     BOT: only if there are teams/shields
+     MID: everything else (players fill this)
+  */
+  const hasTop = !!(league||date||time||venue);
+  const hasBot = !!(t0||t1||lb.badges.length>0);
+  const TOP = hasTop ? H*0.16 : 0;
+  const BOT = hasBot ? H*0.18 : H*0.06;  // always leave bottom margin
+  const MID_Y = TOP;
+  const MID_H = H - TOP - BOT;
+
+  /* ─── 1. BACKGROUND — full canvas, preserve brightness ─── */
+  if(lb.bgImg){
+    ctx.save(); ctx.globalAlpha=bgOpa;
+    coverCenter(ctx,lb.bgImg,0,0,W,H);
+    ctx.restore();
+    // Very light perimeter vignette only
+    const vig=ctx.createRadialGradient(W*0.5,H*0.5,H*0.3,W*0.5,H*0.5,W*0.88);
+    vig.addColorStop(0,'transparent'); vig.addColorStop(1,'rgba(0,0,0,0.28)');
+    ctx.fillStyle=vig; ctx.fillRect(0,0,W,H);
+  } else {
+    // Champion-style gradient: rich blue/purple not black
+    const g=ctx.createRadialGradient(W*0.5,H*0.35,0,W*0.5,H*0.5,W);
+    g.addColorStop(0,'#1a2a5e'); g.addColorStop(0.55,'#0e1a3e'); g.addColorStop(1,'#060c1e');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  }
+
+  /* ─── 2. TOP ZONE: liga + fecha/hora/campo — centrado, oscuro solo si hay texto ─── */
+  if(hasTop){
+    const tPan=ctx.createLinearGradient(0,0,0,TOP*1.6);
+    tPan.addColorStop(0,'rgba(0,0,0,0.75)'); tPan.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=tPan; ctx.fillRect(0,0,W,TOP*1.6);
+
+    ctx.save(); ctx.textAlign='center';
+    ctx.shadowColor='rgba(0,0,0,0.9)'; ctx.shadowBlur=W*0.012;
+
+    let curY = TOP*0.26;
+    const lineStep = TOP*0.26;
+
+    if(league){
+      ctx.font=FC(W*0.026); ctx.fillStyle='rgba(255,255,255,0.72)';
+      ctx.fillText(league.toUpperCase(),W*0.5,curY);
+      curY+=lineStep*0.9;
+    }
+    if(date){
+      ctx.font=FC(W*0.034); ctx.fillStyle='rgba(255,255,255,0.88)';
+      ctx.fillText(date,W*0.5,curY); curY+=lineStep;
+    }
+    if(time&&venue){
+      ctx.font=FM(W*0.048); ctx.fillStyle=acIsTransparent?'transparent':ac;
+      ctx.fillText(time+' · '+venue,W*0.5,curY);
+    } else if(time){
+      ctx.font=FM(W*0.048); ctx.fillStyle=acIsTransparent?'transparent':ac;
+      ctx.fillText(time,W*0.5,curY);
+    } else if(venue){
+      ctx.font=FM(W*0.048); ctx.fillStyle=acIsTransparent?'transparent':ac;
+      ctx.fillText(venue,W*0.5,curY);
+    }
+    ctx.shadowBlur=0; ctx.restore();
+  }
+
+  /* ─── 3. PLAYERS — fill the MID zone completely ─── */
+  const n=lb.players.length;
+  if(n>0){
+    if(layout==='center_big'){
+      const p=lb.players[0];
+      const ph=MID_H*(p.sz/100)*1.1, pw=ph*(p.img.width/p.img.height);
+      const cx=W*p.x, cy=MID_Y+MID_H*p.y;
+      lbGlow(ctx,cx,cy,pw*0.55,acIsTransparent?'#ffffff':ac,0.14);
+      ctx.save(); ctx.filter='saturate(115%) contrast(108%) brightness(1.06)';
+      ctx.drawImage(p.img,cx-pw/2,cy-ph*0.6,pw,ph); ctx.restore();
+
+    } else if(layout==='two_sides'){
+      const players=lb.players.slice(0,Math.min(n,2));
+      players.forEach((p,i)=>{
+        const ph=MID_H*(p.sz/100)*1.08*pSz(), pw=ph*(p.img.width/p.img.height);
+        const cx=W*p.x, botPy=MID_Y+MID_H-ph*0.04;
+        lbGlow(ctx,cx,MID_Y+MID_H*0.45,pw*0.5,acIsTransparent?'#ffffff':ac,0.12);
+        ctx.save(); ctx.filter=`saturate(112%) contrast(106%) brightness(${i===0?1.06:1.02})`;
+        ctx.drawImage(p.img,cx-pw/2,botPy-ph,pw,ph); ctx.restore();
+      });
+      lb.players.slice(2).forEach((p)=>{
+        const ph=MID_H*(p.sz/100)*0.9, pw=ph*(p.img.width/p.img.height);
+        const cx=W*p.x, cy=MID_Y+MID_H*p.y;
+        ctx.save(); ctx.filter='saturate(105%) contrast(103%) brightness(0.95)';
+        ctx.drawImage(p.img,cx-pw/2,cy-ph*0.5,pw,ph); ctx.restore();
+      });
+
+    } else if(layout==='pyramid'){
+      const main=lb.players[0];
+      const ph0=MID_H*(main.sz/100)*1.0*pSz(), pw0=ph0*(main.img.width/main.img.height);
+      lbGlow(ctx,W*0.5,MID_Y+MID_H*0.3,pw0*0.6,acIsTransparent?'#ffffff':ac,0.14);
+      ctx.save(); ctx.filter='saturate(115%) contrast(108%) brightness(1.06)';
+      ctx.drawImage(main.img,W*0.5-pw0/2,MID_Y+MID_H*0.02,pw0,ph0); ctx.restore();
+      const fG=ctx.createLinearGradient(0,MID_Y+MID_H*0.55,0,MID_Y+MID_H*0.88);
+      fG.addColorStop(0,'transparent'); fG.addColorStop(1,'rgba(0,0,0,0.62)');
+      ctx.fillStyle=fG; ctx.fillRect(0,MID_Y+MID_H*0.55,W,MID_H*0.33);
+      const rest=lb.players.slice(1,4); const sw=W/Math.max(rest.length,1);
+      rest.forEach((p,i)=>{
+        const ph2=MID_H*(p.sz/100)*0.82, pw2=ph2*(p.img.width/p.img.height);
+        const cx2=sw*i+sw/2;
+        ctx.save(); ctx.filter='saturate(105%) contrast(103%) brightness(0.95)';
+        ctx.drawImage(p.img,cx2-pw2/2,MID_Y+MID_H*0.42,pw2,ph2); ctx.restore();
+      });
+
+    } else { // manual
+      lb.players.forEach((p,i)=>{
+        const ph=MID_H*(p.sz/100)*1.08*pSz(), pw=ph*(p.img.width/p.img.height);
+        const cx=W*p.x, cy=MID_Y+MID_H*p.y;
+        lbGlow(ctx,cx,cy,pw*0.5,acIsTransparent?'#ffffff':ac,i===0?0.14:0.09);
+        ctx.save(); ctx.filter=`saturate(${i===0?112:105}%) contrast(${i===0?106:103}%) brightness(${i===0?1.05:0.96})`;
+        ctx.drawImage(p.img,cx-pw/2,cy-ph*0.55,pw,ph); ctx.restore();
+      });
+    }
+  }
+
+  /* ─── 4. TEXTO CENTRAL GRANDE — sobre jugadores ─── */
+  if(txtBig&&!acIsTransparent){
+    const mainY = MID_Y + MID_H*(0.04 + txtPosF*0.70);
+    let fsz = W*(0.10 + txtSzF*0.28);
+    ctx.font=FM(fsz);
+    while(ctx.measureText(txtBig).width>W*0.96&&fsz>W*0.04){
+      fsz*=0.9; ctx.font=FM(fsz);
+    }
+    ctx.save(); ctx.textAlign='center';
+    ctx.shadowColor='rgba(0,0,0,0.85)'; ctx.shadowBlur=W*0.022;
+    // Ghost copy below (like reference)
+    ctx.globalAlpha=0.16; ctx.fillStyle=ac;
+    ctx.fillText(txtBig,W*0.5,mainY+fsz*0.52);
+    ctx.globalAlpha=1;
+    ctx.shadowColor=ac; ctx.shadowBlur=W*0.018;
+    ctx.fillStyle=ac; ctx.fillText(txtBig,W*0.5,mainY);
+    ctx.shadowBlur=0; ctx.restore();
+  }
+
+  /* ─── 5. BOTTOM ZONE: equipos + escudos en UNA SOLA LÍNEA ─── */
+  if(hasBot){
+    const botY = H - BOT;
+    // Subtle gradient only to ensure readability — not a black bar
+    const bPan=ctx.createLinearGradient(0,botY-BOT*0.5,0,H);
+    bPan.addColorStop(0,'rgba(0,0,0,0)');
+    bPan.addColorStop(0.35,'rgba(0,0,0,0.70)');
+    bPan.addColorStop(1,'rgba(0,0,0,0.88)');
+    ctx.fillStyle=bPan; ctx.fillRect(0,botY-BOT*0.5,W,H-(botY-BOT*0.5));
+
+    const CY = botY + BOT*0.5; // vertical center of bottom zone
+    const BSIZ = BOT*0.72;
+
+    /* Layout: [badge0] [t0] VS [t1] [badge1] — all in one horizontal line */
+    ctx.save(); ctx.shadowColor='rgba(0,0,0,0.92)'; ctx.shadowBlur=W*0.01;
+
+    // Measure text to determine positioning
+    const hasBadgeL = lb.badges.length>=1;
+    const hasBadgeR = lb.badges.length>=2;
+    const PAD = W*0.03;
+    const BADGE_W = BSIZ*(hasBadgeL&&lb.badges[0]?lb.badges[0].img.width/lb.badges[0].img.height:1);
+
+    // Badge left
+    let curX = PAD;
+    if(hasBadgeL){
+      const b=lb.badges[0];
+      const bw=BSIZ*(b.img.width/b.img.height);
+      ctx.shadowColor='rgba(0,0,0,0.7)'; ctx.shadowBlur=W*0.012;
+      ctx.drawImage(b.img,curX,CY-BSIZ*0.5,bw,BSIZ);
+      ctx.shadowBlur=W*0.01;
+      curX+=bw+W*0.025;
+    }
+
+    // Badge right — reserve space on right
+    let rightX = W-PAD;
+    if(hasBadgeR){
+      const b=lb.badges[1];
+      const bw=BSIZ*(b.img.width/b.img.height);
+      rightX = W-PAD-bw;
+      ctx.drawImage(b.img,rightX,CY-BSIZ*0.5,bw,BSIZ);
+      rightX -= W*0.025;
+    }
+
+    // Team text centered between badges
+    if(t0||t1){
+      const textW = rightX-curX;
+      const textCX = curX + textW*0.5;
+      ctx.textAlign='center';
+
+      if(t0&&t1){
+        // One line: T0 · VS · T1
+        let fsz=W*0.042;
+        ctx.font=FC(fsz);
+        const fullText=t0+' VS '+t1;
+        while(ctx.measureText(fullText).width>textW*0.92&&fsz>W*0.02){
+          fsz*=0.92; ctx.font=FC(fsz);
+        }
+        // Draw: t0 in white, VS in sig, t1 in white
+        const vsW=ctx.measureText(' VS ').width;
+        const t0W=ctx.measureText(t0).width;
+        const t1W=ctx.measureText(t1).width;
+        const totalW=t0W+vsW+t1W;
+        const startX=textCX-totalW/2;
+        ctx.textAlign='left';
+        ctx.fillStyle='rgba(255,255,255,0.97)'; ctx.fillText(t0,startX,CY+fsz*0.38);
+        ctx.fillStyle=sigIsTransparent?'rgba(255,255,255,0.97)':sig;
+        ctx.fillText(' VS ',startX+t0W,CY+fsz*0.38);
+        ctx.fillStyle='rgba(255,255,255,0.97)';
+        ctx.fillText(t1,startX+t0W+vsW,CY+fsz*0.38);
+      } else {
+        let fsz=W*0.058;
+        ctx.font=FC(fsz);
+        while(ctx.measureText(t0||t1).width>textW*0.9&&fsz>W*0.022){
+          fsz*=0.92; ctx.font=FC(fsz);
+        }
+        ctx.textAlign='center';
+        ctx.fillStyle=acIsTransparent?'rgba(255,255,255,0.97)':ac;
+        ctx.fillText(t0||t1,textCX,CY+fsz*0.38);
+      }
+    }
+    ctx.shadowBlur=0; ctx.restore();
+  }
+
+  /* ─── 6. Perimeter vignette ─── */
+  if(S.fx.vignette){
+    const vig=ctx.createRadialGradient(W*0.5,H*0.5,H*0.25,W*0.5,H*0.5,W*0.9);
+    vig.addColorStop(0,'transparent'); vig.addColorStop(1,'rgba(0,0,0,0.38)');
+    ctx.fillStyle=vig; ctx.fillRect(0,0,W,H);
+  }
+}
+
+function lbGlow(ctx,cx,cy,r,color,alpha){
+  if(alpha<=0||r<=0)return;
+  const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+  g.addColorStop(0,hexA(color,Math.min(alpha,0.5)));g.addColorStop(0.5,hexA(color,alpha*0.35));g.addColorStop(1,'transparent');
+  ctx.fillStyle=g;ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
+}
+
+updateHint();
+// Cargar API key guardada
+loadSavedKey();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+  PESTAÑA EDICIÓN FOTOGRÁFICA — añadida sin modificar nada anterior
+  ⚠ Solo edición fotográfica global. NUNCA retoque facial IA.
+═══════════════════════════════════════════════════════════ -->
+<style>
+#edit-fab{position:fixed;bottom:22px;right:22px;z-index:9999;background:var(--ac);color:#000;border:none;border-radius:50px;padding:12px 20px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 20px rgba(232,255,0,.35);display:flex;align-items:center;gap:8px}
+#edit-fab:hover{transform:scale(1.04)}
+#edit-modal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.88);overflow-y:auto}
+#edit-modal.open{display:block}
+#edit-panel{max-width:520px;margin:0 auto;padding:16px;min-height:100vh}
+.ep-header{display:flex;align-items:center;justify-content:space-between;padding:14px 0 16px;border-bottom:1px solid var(--bd);margin-bottom:16px}
+.ep-header h2{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--ac)}
+.ep-close{background:var(--sf);border:1px solid var(--bd);color:var(--tx);border-radius:8px;padding:7px 14px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1px}
+.ep-sec{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2.5px;color:var(--ac);text-transform:uppercase;margin:14px 0 8px;border-left:3px solid var(--ac);padding-left:8px}
+.ep-dz{border:2px dashed var(--bd);border-radius:12px;padding:24px 16px;text-align:center;cursor:pointer;transition:.2s;margin-bottom:12px}
+.ep-dz:hover,.ep-dz.drag{border-color:var(--ac);background:rgba(232,255,0,.04)}
+.ep-dz span{font-size:28px;display:block;margin-bottom:8px}
+.ep-dz p{font-size:11px;color:var(--td);font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.ep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}
+.ep-thumb{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent}
+.ep-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.ep-thumb.done{border-color:#00c864}
+.ep-thumb.done::after{content:'✓';position:absolute;bottom:3px;right:3px;background:#00c864;color:#000;font-size:9px;font-weight:900;padding:1px 5px;border-radius:3px;font-family:'Barlow Condensed',sans-serif}
+.ep-thumb .ep-rm{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.8);border:none;color:#fff;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ep-pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.ep-pill{padding:6px 12px;border-radius:20px;border:1px solid var(--bd);background:var(--sf);color:var(--td);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:.2s}
+.ep-pill.on{background:var(--ac);color:#000;border-color:var(--ac);font-weight:700}
+.ep-btn{width:100%;padding:14px;background:var(--ac);border:none;border-radius:10px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:8px;color:#000}
+.ep-btn.sec{background:transparent;border:1px solid var(--bd);color:var(--tx);margin-top:6px}
+.ep-btn.red{background:transparent;border:1px solid #ff3c3c;color:#ff3c3c;margin-top:6px}
+.ep-st{text-align:center;font-size:11px;letter-spacing:1.5px;color:#00c864;text-transform:uppercase;margin:8px 0;min-height:16px;font-family:'Barlow Condensed',sans-serif}
+/* Revisión individual */
+.ep-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.ep-nav button{background:var(--sf);border:1px solid var(--bd);color:var(--tx);padding:7px 14px;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
+.ep-nav button:disabled{opacity:.3;cursor:not-allowed}
+.ep-cmp{position:relative;width:100%;aspect-ratio:3/4;border-radius:10px;overflow:hidden;margin-bottom:12px;background:#111;cursor:ew-resize}
+.ep-cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ep-cmp .ep-after{clip-path:inset(0 50% 0 0)}
+.ep-cmp .ep-hdl{position:absolute;top:0;left:50%;width:2px;height:100%;background:var(--ac);pointer-events:none}
+.ep-cmp .ep-hdl::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:26px;height:26px;background:var(--ac);border-radius:50%}
+.ep-lbl{position:absolute;bottom:8px;font-size:9px;font-weight:700;letter-spacing:1.5px;font-family:'Barlow Condensed',sans-serif;padding:2px 7px;border-radius:3px}
+.ep-lbl.a{left:8px;background:rgba(0,0,0,.65);color:#fff}
+.ep-lbl.b{right:8px;background:var(--ac);color:#000}
+.ep-sl-row{margin-bottom:8px}
+.ep-sl-row label{display:flex;justify-content:space-between;font-size:10px;color:var(--td);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;font-family:'Barlow Condensed',sans-serif}
+.ep-sl-row label span{color:var(--ac)}
+.ep-sl-row input[type=range]{width:100%;accent-color:var(--ac);height:3px}
+</style>
+
+<!-- Botón flotante -->
+<button id="edit-fab" onclick="epOpen()">🎨 Edición fotográfica</button>
+
+<!-- Modal de edición -->
+<div id="edit-modal">
+<div id="edit-panel">
+  <div class="ep-header">
+    <h2>🎨 Edición fotográfica</h2>
+    <button class="ep-close" onclick="epClose()">✕ Cerrar</button>
+  </div>
+
+  <!-- VISTA PRINCIPAL -->
+  <div id="ep-main">
+    <div class="ep-dz" id="ep-dz" onclick="document.getElementById('ep-file').click()">
+      <span>📁</span>
+      <p>Toca para seleccionar · varias fotos a la vez</p>
+    </div>
+    <input type="file" id="ep-file" accept="image/*" multiple style="display:none" onchange="epLoadFiles(this.files)">
+    <div class="ep-grid" id="ep-grid"></div>
+
+    <div class="ep-sec">Tipo de fotografía</div>
+    <div class="ep-pills" id="ep-tipo">
+      <button class="ep-pill on" data-v="deportiva" onclick="epPill(this,'ep-tipo')">⚽ Deportiva</button>
+      <button class="ep-pill" data-v="retrato" onclick="epPill(this,'ep-tipo')">👤 Retrato</button>
+      <button class="ep-pill" data-v="equipo" onclick="epPill(this,'ep-tipo')">👥 Equipo</button>
+      <button class="ep-pill" data-v="paisaje" onclick="epPill(this,'ep-tipo')">🏔 Paisaje</button>
+      <button class="ep-pill" data-v="urbana" onclick="epPill(this,'ep-tipo')">🏙 Urbana</button>
+      <button class="ep-pill" data-v="evento" onclick="epPill(this,'ep-tipo')">🎉 Evento</button>
+    </div>
+
+    <div class="ep-sec">Estilo de acabado</div>
+    <div class="ep-pills" id="ep-estilo">
+      <button class="ep-pill on" data-v="realista" onclick="epPill(this,'ep-estilo')">🎯 Realista</button>
+      <button class="ep-pill" data-v="deportivo" onclick="epPill(this,'ep-estilo')">⚡ Deportivo potente</button>
+      <button class="ep-pill" data-v="editorial" onclick="epPill(this,'ep-estilo')">✨ Editorial</button>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;margin-bottom:4px">
+      <input type="checkbox" id="ep-print" style="accent-color:var(--ac);width:16px;height:16px">
+      <div>
+        <label for="ep-print" style="font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer">🖨 Modo impresión optimizado</label>
+        <p style="font-size:10px;color:var(--td);margin-top:2px">Evita negros empastados y blancos quemados</p>
+      </div>
+    </div>
+
+    <button class="ep-btn" onclick="epProcesarLote()" id="ep-btn-lote">⚡ MEJORAR LOTE AUTOMÁTICAMENTE</button>
+    <button class="ep-btn sec" onclick="epRevisarPrimera()" id="ep-btn-rev">🔍 REVISAR INDIVIDUALMENTE</button>
+    <button class="ep-btn red" onclick="epLimpiar()">🗑 LIMPIAR TODO</button>
+    <div class="ep-st" id="ep-st"></div>
+  </div>
+
+  <!-- VISTA REVISIÓN INDIVIDUAL -->
+  <div id="ep-review" style="display:none">
+    <div class="ep-nav">
+      <button onclick="epNav(-1)" id="ep-prev">◀ Ant.</button>
+      <span id="ep-counter" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--td)">1 / 1</span>
+      <button onclick="epNav(1)" id="ep-next">Sig. ▶</button>
+    </div>
+    <div class="ep-cmp" id="ep-cmp">
+      <img id="ep-before" src="" alt="Antes">
+      <img id="ep-after" class="ep-after" src="" alt="Después">
+      <div class="ep-hdl" id="ep-hdl"></div>
+      <span class="ep-lbl a">ANTES</span>
+      <span class="ep-lbl b">DESPUÉS</span>
+    </div>
+    <div class="ep-sec">Ajuste fino</div>
+    <div id="ep-sliders">
+      <div class="ep-sl-row"><label>Exposición <span id="epv-exp">0</span></label><input type="range" id="eps-exp" min="-100" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Brillo <span id="epv-bri">0</span></label><input type="range" id="eps-bri" min="-100" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Contraste <span id="epv-con">0</span></label><input type="range" id="eps-con" min="-100" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Sombras <span id="epv-sha">0</span></label><input type="range" id="eps-sha" min="-100" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Altas luces <span id="epv-hig">0</span></label><input type="range" id="eps-hig" min="-100" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Temperatura <span id="epv-tmp">0</span></label><input type="range" id="eps-tmp" min="-100" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Saturación <span id="epv-sat">0</span></label><input type="range" id="eps-sat" min="-100" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Vibrancia <span id="epv-vib">0</span></label><input type="range" id="eps-vib" min="-100" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Claridad <span id="epv-cla">0</span></label><input type="range" id="eps-cla" min="-100" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Nitidez <span id="epv-nit">0</span></label><input type="range" id="eps-nit" min="0" max="100" value="0" oninput="epSliders()"></div>
+      <div class="ep-sl-row"><label>Reducción ruido <span id="epv-noi">0</span></label><input type="range" id="eps-noi" min="0" max="100" value="0" oninput="epSliders()"></div>
+    </div>
+    <button class="ep-btn" onclick="epGuardar()" style="margin-top:10px">💾 GUARDAR ESTA FOTO</button>
+    <button class="ep-btn sec" onclick="epDlFoto()">↓ DESCARGAR ESTA FOTO (PNG)</button>
+    <button class="ep-btn sec" onclick="epDlLote()">↓ DESCARGAR TODO EL LOTE (PNG)</button>
+    <button class="ep-btn red" onclick="epVolverMain()">← VOLVER</button>
+    <div class="ep-st" id="ep-st2"></div>
+  </div>
+</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  EDICIÓN FOTOGRÁFICA — código independiente, no modifica nada anterior
+//  ⚠ Solo edición global. NUNCA retoque facial IA.
+// ═══════════════════════════════════════════════════════════════
+var epFotos=[], epIdx=0, epTipo='deportiva', epEstilo='realista';
+
+// Presets calibrados profesionalmente por tipo + estilo
+var epPresets={
+  deportiva:{
+    realista: {exp:15,bri:8,con:22,sha:25,hig:-18,tmp:5,sat:16,vib:20,cla:18,nit:25,noi:10},
+    deportivo:{exp:20,bri:12,con:35,sha:30,hig:-22,tmp:8,sat:24,vib:30,cla:28,nit:38,noi:6},
+    editorial:{exp:10,bri:5,con:25,sha:20,hig:-15,tmp:0,sat:10,vib:14,cla:16,nit:18,noi:12}
+  },
+  retrato:{
+    realista: {exp:10,bri:6,con:14,sha:22,hig:-10,tmp:6,sat:8,vib:10,cla:6,nit:10,noi:20},
+    deportivo:{exp:14,bri:8,con:22,sha:20,hig:-14,tmp:5,sat:14,vib:16,cla:12,nit:18,noi:14},
+    editorial:{exp:8,bri:4,con:18,sha:18,hig:-8,tmp:2,sat:6,vib:8,cla:8,nit:10,noi:22}
+  },
+  equipo:{
+    realista: {exp:14,bri:8,con:18,sha:22,hig:-14,tmp:4,sat:14,vib:16,cla:12,nit:16,noi:12},
+    deportivo:{exp:20,bri:12,con:30,sha:28,hig:-18,tmp:6,sat:22,vib:26,cla:20,nit:30,noi:8},
+    editorial:{exp:10,bri:5,con:20,sha:18,hig:-12,tmp:0,sat:8,vib:10,cla:12,nit:12,noi:14}
+  },
+  paisaje:{
+    realista: {exp:10,bri:5,con:16,sha:25,hig:-14,tmp:-4,sat:18,vib:22,cla:16,nit:12,noi:10},
+    deportivo:{exp:14,bri:8,con:26,sha:22,hig:-18,tmp:-2,sat:24,vib:28,cla:22,nit:18,noi:8},
+    editorial:{exp:6,bri:3,con:20,sha:18,hig:-10,tmp:-8,sat:12,vib:16,cla:14,nit:10,noi:12}
+  },
+  urbana:{
+    realista: {exp:8,bri:4,con:20,sha:15,hig:-12,tmp:-4,sat:10,vib:12,cla:14,nit:16,noi:12},
+    deportivo:{exp:12,bri:6,con:30,sha:18,hig:-16,tmp:-2,sat:16,vib:20,cla:20,nit:24,noi:8},
+    editorial:{exp:5,bri:2,con:24,sha:12,hig:-8,tmp:-10,sat:6,vib:8,cla:16,nit:12,noi:16}
+  },
+  evento:{
+    realista: {exp:16,bri:8,con:16,sha:25,hig:-10,tmp:8,sat:15,vib:18,cla:10,nit:12,noi:15},
+    deportivo:{exp:20,bri:12,con:26,sha:22,hig:-12,tmp:8,sat:20,vib:25,cla:15,nit:20,noi:10},
+    editorial:{exp:10,bri:5,con:18,sha:18,hig:-8,tmp:4,sat:10,vib:12,cla:10,nit:10,noi:18}
+  }
+};
+
+function epGetPreset(){
+  var p=JSON.parse(JSON.stringify(epPresets[epTipo]?.[epEstilo]||epPresets.deportiva.realista));
+  if(document.getElementById('ep-print').checked){
+    p.con-=6;p.hig+=8;p.sha-=6;p.sat-=5;p.vib-=5;p.nit-=6;
+  }
+  return p;
+}
+
+function epOpen(){document.getElementById('edit-modal').classList.add('open');}
+function epClose(){document.getElementById('edit-modal').classList.remove('open');}
+
+function epPill(btn,groupId){
+  document.querySelectorAll('#'+groupId+' .ep-pill').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  if(groupId==='ep-tipo')epTipo=btn.dataset.v;
+  else epEstilo=btn.dataset.v;
+}
+
+// Drag & drop
+(function(){
+  var dz=document.getElementById('ep-dz');
+  dz.addEventListener('dragover',function(e){e.preventDefault();dz.classList.add('drag');});
+  dz.addEventListener('dragleave',function(){dz.classList.remove('drag');});
+  dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('drag');epLoadFiles(e.dataTransfer.files);});
+})();
+
+function epLoadFiles(files){
+  for(var i=0;i<files.length;i++){
+    (function(file){
+      var r=new FileReader();
+      r.onload=function(e){
+        var img=new Image();
+        img.onload=function(){
+          var cv=document.createElement('canvas');
+          cv.width=img.naturalWidth;cv.height=img.naturalHeight;
+          cv.getContext('2d').drawImage(img,0,0);
+          epFotos.push({orig:cv,edit:null,aj:null,nombre:file.name});
+          epRenderGrid();
+        };
+        img.src=e.target.result;
+      };
+      r.readAsDataURL(file);
+    })(files[i]);
+  }
+}
+
+function epRenderGrid(){
+  var g=document.getElementById('ep-grid');g.innerHTML='';
+  epFotos.forEach(function(f,i){
+    var d=document.createElement('div');d.className='ep-thumb'+(f.edit?' done':'');
+    var img=document.createElement('img');
+    img.src=(f.edit||f.orig).toDataURL('image/jpeg',0.55);
+    var rm=document.createElement('button');rm.className='ep-rm';rm.textContent='×';
+    rm.onclick=function(e){e.stopPropagation();epFotos.splice(i,1);epRenderGrid();};
+    d.appendChild(img);d.appendChild(rm);
+    d.onclick=function(){epAbrirRevision(i);};
+    g.appendChild(d);
+  });
+  document.getElementById('ep-btn-lote').disabled=epFotos.length===0;
+  document.getElementById('ep-btn-rev').disabled=epFotos.length===0;
+}
+
+// Motor de edición — LUT + S-curve profesional
+// ⚠ Solo ajustes globales de píxel. NUNCA segmentación facial.
+function epAplicar(src,aj){
+  var W=src.width,H=src.height;
+  var out=document.createElement('canvas');out.width=W;out.height=H;
+  var ctx=out.getContext('2d');ctx.drawImage(src,0,0);
+  var id=ctx.getImageData(0,0,W,H),d=id.data;
+
+  // LUT precomputada para velocidad
+  var lR=new Uint8ClampedArray(256),lG=new Uint8ClampedArray(256),lB=new Uint8ClampedArray(256);
+  var exp=aj.exp/100,bri=aj.bri/100,con=aj.con/100,sha=aj.sha/100,hig=aj.hig/100,tmp=aj.tmp/100;
+
+  for(var v=0;v<256;v++){
+    var f=v/255;
+    // Exposición (curva gamma)
+    if(exp!==0)f=Math.pow(Math.max(0,f),1/(1+exp*1.5));
+    // Brillo
+    f+=bri*0.25;
+    // S-curve contraste
+    if(con!==0)f=(f-0.5)*(1+con*0.85)+0.5;
+    // Sombras (zona oscura)
+    if(sha!==0)f+=sha*0.35*Math.pow(1-Math.max(0,Math.min(1,f)),2);
+    // Altas luces (zona clara)
+    if(hig!==0)f+=hig*0.30*Math.pow(Math.max(0,Math.min(1,f)),2);
+    var fv=Math.max(0,Math.min(255,Math.round(f*255)));
+    lR[v]=tmp>0?Math.min(255,Math.round(fv*(1+tmp*0.20))):fv;
+    lG[v]=fv;
+    lB[v]=tmp>0?Math.max(0,Math.round(fv*(1-tmp*0.20))):tmp<0?Math.min(255,Math.round(fv*(1-tmp*0.20))):fv;
+    if(tmp<0){lR[v]=Math.max(0,Math.round(fv*(1+tmp*0.20)));lB[v]=Math.min(255,Math.round(fv*(1-tmp*0.20)));}
+  }
+
+  var sat=aj.sat/100,vib=aj.vib/100;
+  for(var i=0;i<d.length;i+=4){
+    var r=lR[d[i]],g=lG[d[i+1]],b=lB[d[i+2]];
+    // Saturación
+    if(sat!==0){var gr=r*.299+g*.587+b*.114,sf=1+sat*.85;r=Math.max(0,Math.min(255,gr+(r-gr)*sf));g=Math.max(0,Math.min(255,gr+(g-gr)*sf));b=Math.max(0,Math.min(255,gr+(b-gr)*sf));}
+    // Vibrancia (protege colores ya saturados)
+    if(vib!==0){var mx=Math.max(r,g,b)/255,mn=Math.min(r,g,b)/255,ds=mx-mn,vf=vib*(1-ds)*.65,gv=r*.299+g*.587+b*.114;r=Math.max(0,Math.min(255,gv+(r-gv)*(1+vf)));g=Math.max(0,Math.min(255,gv+(g-gv)*(1+vf)));b=Math.max(0,Math.min(255,gv+(b-gv)*(1+vf)));}
+    d[i]=Math.round(r);d[i+1]=Math.round(g);d[i+2]=Math.round(b);
+  }
+  ctx.putImageData(id,0,0);
+
+  // Claridad (unsharp mask moderado — global)
+  var cla=aj.cla/100;
+  if(cla>0.04){
+    var br=Math.round(W*.006+1.5),tc=document.createElement('canvas');tc.width=W;tc.height=H;
+    var tctx=tc.getContext('2d');tctx.filter='blur('+br+'px)';tctx.drawImage(out,0,0);
+    var o=ctx.getImageData(0,0,W,H),bl=tctx.getImageData(0,0,W,H),od=o.data,bd=bl.data,am=cla*.70;
+    for(var j=0;j<od.length;j+=4){od[j]=Math.max(0,Math.min(255,od[j]+(od[j]-bd[j])*am));od[j+1]=Math.max(0,Math.min(255,od[j+1]+(od[j+1]-bd[j+1])*am));od[j+2]=Math.max(0,Math.min(255,od[j+2]+(od[j+2]-bd[j+2])*am));}
+    ctx.putImageData(o,0,0);
+  }
+  // Nitidez global
+  var nit=aj.nit/100;
+  if(nit>0.04){
+    var sr=Math.max(1,Math.round(nit*1.2)),tn=document.createElement('canvas');tn.width=W;tn.height=H;
+    var tntx=tn.getContext('2d');tntx.filter='blur('+sr+'px)';tntx.drawImage(out,0,0);
+    var on=ctx.getImageData(0,0,W,H),bn=tntx.getImageData(0,0,W,H),dn=on.data,dbn=bn.data,sa=nit*.65;
+    for(var k=0;k<dn.length;k+=4){dn[k]=Math.max(0,Math.min(255,dn[k]+(dn[k]-dbn[k])*sa));dn[k+1]=Math.max(0,Math.min(255,dn[k+1]+(dn[k+1]-dbn[k+1])*sa));dn[k+2]=Math.max(0,Math.min(255,dn[k+2]+(dn[k+2]-dbn[k+2])*sa));}
+    ctx.putImageData(on,0,0);
+  }
+  // Reducción ruido
+  var noi=aj.noi/100;
+  if(noi>0.08){var tnoi=document.createElement('canvas');tnoi.width=W;tnoi.height=H;var tc2=tnoi.getContext('2d');tc2.filter='blur('+(noi*.9).toFixed(1)+'px)';tc2.drawImage(out,0,0);ctx.globalAlpha=noi*.30;ctx.drawImage(tnoi,0,0);ctx.globalAlpha=1;}
+  return out;
+}
+
+function epProcesarLote(){
+  if(!epFotos.length)return;
+  var st=document.getElementById('ep-st');
+  st.textContent='⏳ Procesando '+epFotos.length+' foto(s)...';st.style.color='#4a90d9';
+  var p=epGetPreset();
+  setTimeout(function(){
+    epFotos.forEach(function(f){f.aj=JSON.parse(JSON.stringify(p));f.edit=epAplicar(f.orig,f.aj);});
+    epRenderGrid();
+    st.textContent='✅ '+epFotos.length+' foto(s) mejoradas';st.style.color='#00c864';
+  },30);
+}
+
+function epRevisarPrimera(){if(epFotos.length)epAbrirRevision(0);}
+
+function epAbrirRevision(idx){
+  epIdx=idx;
+  document.getElementById('ep-main').style.display='none';
+  document.getElementById('ep-review').style.display='block';
+  epMostrar();
+}
+
+function epMostrar(){
+  var f=epFotos[epIdx];if(!f)return;
+  if(!f.edit){f.aj=epGetPreset();f.edit=epAplicar(f.orig,f.aj);}
+  document.getElementById('ep-before').src=f.orig.toDataURL('image/jpeg',.85);
+  document.getElementById('ep-after').src=f.edit.toDataURL('image/jpeg',.85);
+  // Sliders
+  var a=f.aj;
+  ['exp','bri','con','sha','hig','tmp','sat','vib','cla','nit','noi'].forEach(function(k){
+    var sl=document.getElementById('eps-'+k),sv=document.getElementById('epv-'+k);
+    if(sl){sl.value=a[k]||0;if(sv)sv.textContent=a[k]||0;}
+  });
+  document.getElementById('ep-counter').textContent=(epIdx+1)+' / '+epFotos.length;
+  document.getElementById('ep-prev').disabled=epIdx===0;
+  document.getElementById('ep-next').disabled=epIdx===epFotos.length-1;
+  document.getElementById('ep-after').style.clipPath='inset(0 50% 0 0)';
+  document.getElementById('ep-hdl').style.left='50%';
+}
+
+function epNav(d){epGuardar();epIdx=Math.max(0,Math.min(epFotos.length-1,epIdx+d));epMostrar();}
+
+function epSliders(){
+  var f=epFotos[epIdx];if(!f)return;
+  var a={};
+  ['exp','bri','con','sha','hig','tmp','sat','vib','cla','nit','noi'].forEach(function(k){
+    a[k]=+document.getElementById('eps-'+k).value;
+    var sv=document.getElementById('epv-'+k);if(sv)sv.textContent=a[k];
+  });
+  f.aj=a;f.edit=epAplicar(f.orig,a);
+  document.getElementById('ep-after').src=f.edit.toDataURL('image/jpeg',.85);
+}
+
+function epGuardar(){epRenderGrid();}
+
+function epVolverMain(){
+  document.getElementById('ep-review').style.display='none';
+  document.getElementById('ep-main').style.display='block';
+  epRenderGrid();
+}
+
+function epLimpiar(){
+  if(epFotos.length>0&&!confirm('¿Borrar todas las fotos?'))return;
+  epFotos=[];epIdx=0;
+  document.getElementById('ep-grid').innerHTML='';
+  document.getElementById('ep-st').textContent='';
+  document.getElementById('ep-file').value='';
+}
+
+function epDlFoto(){
+  var f=epFotos[epIdx];if(!f||!f.edit)return;
+  var a=document.createElement('a');
+  a.download=(f.nombre||'foto').replace(/\.[^.]+$/,'')+'-editada.png';
+  a.href=f.edit.toDataURL('image/png',1);a.click();
+}
+
+function epDlLote(){
+  var done=epFotos.filter(function(f){return f.edit;});
+  if(!done.length){alert('Primero procesa las fotos con el botón Mejorar Lote');return;}
+  done.forEach(function(f,i){
+    setTimeout(function(){
+      var a=document.createElement('a');
+      a.download=(f.nombre||'foto-'+i).replace(/\.[^.]+$/,'')+'-editada.png';
+      a.href=f.edit.toDataURL('image/png',1);a.click();
+    },i*400);
+  });
+  document.getElementById('ep-st2').textContent='✅ Descargando '+done.length+' fotos...';
+  document.getElementById('ep-st2').style.color='#00c864';
+}
+
+// Comparador drag
+(function(){
+  var cmp=document.getElementById('ep-cmp'),hdl=document.getElementById('ep-hdl'),drag=false;
+  cmp.addEventListener('mousedown',function(){drag=true;});
+  cmp.addEventListener('touchstart',function(){drag=true;},{passive:true});
+  document.addEventListener('mouseup',function(){drag=false;});
+  document.addEventListener('touchend',function(){drag=false;});
+  function mv(cx){
+    if(!drag)return;
+    var r=cmp.getBoundingClientRect(),p=Math.max(5,Math.min(95,((cx-r.left)/r.width)*100));
+    hdl.style.left=p+'%';
+    document.getElementById('ep-after').style.clipPath='inset(0 '+(100-p)+'% 0 0)';
+  }
+  document.addEventListener('mousemove',function(e){mv(e.clientX);});
+  document.addEventListener('touchmove',function(e){mv(e.touches[0].clientX);},{passive:true});
+})();
+</script>
+</body>
+</html>
