@@ -1,0 +1,786 @@
+{
+  "schemaVersion": 1,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "orientation": "portrait"
+  },
+  "constraints": {
+    "generativeAI": true,
+    "sourcePhotosOnly": true,
+    "preserveUploadedPixels": true,
+    "faceProtection": "Never apply tonal edits to pixels inside manually confirmed human or animal face masks.",
+    "backgroundRemoval": "Cutout layers use on-device MediaPipe human segmentation or a user-supplied transparent PNG. Segmentation is approximate and intended only as a first cut; require visual review before export. Never claim success if the segmentation failed.",
+    "generativeAIUsage": "Solo se usa en fondos artísticos preparados; los píxeles del jugador no se generan, amplían ni estilizan."
+  },
+  "independentTools": [
+    {
+      "id": "photo-levels",
+      "label": "Editar · mejorar niveles",
+      "purpose": "Traditional photographic adjustments for one image or a batch, independent of montage templates.",
+      "photoCount": {
+        "min": 1,
+        "max": 100
+      },
+      "adjustments": [
+        "exposure",
+        "levels",
+        "contrast",
+        "sharpness",
+        "noiseReduction",
+        "whiteBalance"
+      ],
+      "batch": true,
+      "faceProtection": "Require manual review and confirmed masks for every photo; fail closed when a photo is unreviewed or verification fails."
+    }
+  ],
+  "templates": [
+    {
+      "id": "hero-double-exposure",
+      "name": "Doble exposición de jugador",
+      "reference": 1,
+      "photoCount": {
+        "min": 1,
+        "max": 2
+      },
+      "photoSlots": [
+        {
+          "id": "portrait",
+          "label": "Retrato grande",
+          "role": "portrait",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable",
+          "opacity": 0.42
+        },
+        {
+          "id": "action",
+          "label": "Jugador en acción",
+          "role": "full-body-cutout",
+          "required": false,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable",
+          "requiresTransparentCutout": true
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "number",
+        "team",
+        "subtitle"
+      ],
+      "layers": [
+        "stadium-gradient",
+        "portrait-photo",
+        "action-photo-cutout",
+        "light-streaks",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "gradient",
+          "opacity",
+          "non-generative-vector-light-lines"
+        ],
+        "generative": true,
+        "generativeBackground": true
+      },
+      "backgroundAsset": "backgrounds/stadium-blue-light.png",
+      "referenceTreatment": "Retrato protagonista grande + figura de acción delante, estadio azul y líneas de luz."
+    },
+    {
+      "id": "front-back-number-poster",
+      "name": "Dorsal y jugador",
+      "reference": 2,
+      "photoCount": {
+        "min": 1,
+        "max": 2
+      },
+      "photoSlots": [
+        {
+          "id": "back",
+          "label": "Vista de espalda",
+          "role": "back-view",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "front",
+          "label": "Vista frontal o acción",
+          "role": "full-body-cutout",
+          "required": false,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable",
+          "requiresTransparentCutout": true
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "number",
+        "team"
+      ],
+      "layers": [
+        "paint-splatter-shapes",
+        "back-photo",
+        "number",
+        "front-photo-cutout",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "color-glow",
+          "vector-splatter",
+          "opacity"
+        ],
+        "generative": true,
+        "generativeBackground": true
+      },
+      "referenceTreatment": "Jugador frontal recortado, dorsal grande, electricidad turquesa y salpicaduras sobre estadio nocturno.",
+      "backgroundAsset": "backgrounds/stadium-electric-cyan.png"
+    },
+    {
+      "id": "training-triptych",
+      "name": "Tríptico de entrenamiento",
+      "reference": 3,
+      "photoCount": {
+        "min": 3,
+        "max": 3
+      },
+      "photoSlots": [
+        {
+          "id": "frame-1",
+          "label": "Foto superior",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "frame-2",
+          "label": "Foto central",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "frame-3",
+          "label": "Foto inferior",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        }
+      ],
+      "textFields": [
+        "headline",
+        "subtitle",
+        "credit"
+      ],
+      "layers": [
+        "photo-band-1",
+        "photo-band-2",
+        "photo-band-3",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "dark-overlay-for-legibility"
+        ],
+        "generative": false
+      },
+      "referenceTreatment": "Tres escenas reales a pantalla completa, en bandas como el vídeo de entrenamiento."
+    },
+    {
+      "id": "action-photo-editorial",
+      "name": "Foto de partido editorial",
+      "reference": 4,
+      "photoCount": {
+        "min": 1,
+        "max": 1
+      },
+      "photoSlots": [
+        {
+          "id": "hero",
+          "label": "Foto de acción",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "number",
+        "team",
+        "caption"
+      ],
+      "layers": [
+        "hero-photo",
+        "subtle-gradient",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "exposure-overlay",
+          "gradient"
+        ],
+        "generative": false
+      },
+      "referenceTreatment": "Foto real del partido a sangre, titular editorial y luz de estadio."
+    },
+    {
+      "id": "sketch-hero-poster",
+      "name": "Jugador con trazos gráficos",
+      "reference": 5,
+      "photoCount": {
+        "min": 1,
+        "max": 1
+      },
+      "photoSlots": [
+        {
+          "id": "hero",
+          "label": "Foto del jugador",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable",
+          "requiresTransparentCutout": true
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "number",
+        "team"
+      ],
+      "layers": [
+        "paper-background",
+        "vector-brush-strokes",
+        "hero-photo-cutout",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "vector-brush-strokes",
+          "paper-texture"
+        ],
+        "generative": true,
+        "photoStyleTransfer": false,
+        "generativeBackground": true
+      },
+      "backgroundAsset": "backgrounds/ink-paper-splatter.png",
+      "referenceTreatment": "Papel marfil con tinta y salpicaduras; el jugador sigue siendo una foto real."
+    },
+    {
+      "id": "smoke-stadium-hero",
+      "name": "Estadio dramático",
+      "reference": 6,
+      "photoCount": {
+        "min": 1,
+        "max": 1
+      },
+      "photoSlots": [
+        {
+          "id": "hero",
+          "label": "Foto del jugador",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "number",
+        "team",
+        "headline"
+      ],
+      "layers": [
+        "dark-stadium-photo-or-gradient",
+        "hero-photo",
+        "non-generative-smoke-shapes",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "gradient",
+          "opacity",
+          "vector-smoke-accents"
+        ],
+        "generative": true,
+        "noSyntheticPhotoBackground": true,
+        "generativeBackground": true
+      },
+      "backgroundAsset": "backgrounds/stadium-smoke-fire.png",
+      "referenceTreatment": "Estadio oscuro con humo blanco, focos y fuego ambiental detrás del jugador recortado."
+    },
+    {
+      "id": "anime-player-poster",
+      "name": "Estilo anime",
+      "reference": 7,
+      "available": false,
+      "photoCount": {
+        "min": 1,
+        "max": 1
+      },
+      "photoSlots": [
+        {
+          "id": "hero",
+          "label": "Foto del jugador",
+          "required": true
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "number",
+        "team"
+      ],
+      "unavailableReason": "La referencia convierte al jugador en dibujo. Para mantener intacta su imagen, no se ofrece esa transformación; el fondo artístico sí puede generarse sin alterar al jugador.",
+      "referenceTreatment": "El estilo cambia al jugador y por eso se deja fuera; el fondo anime podría añadirse sin alterar la foto."
+    },
+    {
+      "id": "club-triple-exposure",
+      "name": "Póster de club con tres planos",
+      "reference": 8,
+      "photoCount": {
+        "min": 1,
+        "max": 3
+      },
+      "photoSlots": [
+        {
+          "id": "portrait",
+          "label": "Retrato principal",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "mid-shot",
+          "label": "Plano medio",
+          "required": false,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable",
+          "requiresTransparentCutout": true
+        },
+        {
+          "id": "action",
+          "label": "Foto de acción",
+          "required": false,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable",
+          "requiresTransparentCutout": true
+        }
+      ],
+      "textFields": [
+        "team",
+        "playerName",
+        "number",
+        "headline"
+      ],
+      "layers": [
+        "stadium-background",
+        "portrait-photo",
+        "mid-shot-cutout",
+        "action-cutout",
+        "team-title",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "opacity",
+          "gradient",
+          "non-generative-light-lines"
+        ],
+        "generative": true,
+        "generativeBackground": true
+      },
+      "backgroundAsset": "backgrounds/stadium-blue-light.png",
+      "referenceTreatment": "Retrato de club a gran escala, acción delante y atmósfera azul de estadio."
+    },
+    {
+      "id": "monochrome-portrait-action",
+      "name": "Retrato en blanco y negro",
+      "reference": 9,
+      "photoCount": {
+        "min": 1,
+        "max": 2
+      },
+      "photoSlots": [
+        {
+          "id": "portrait",
+          "label": "Retrato",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable",
+          "filter": "grayscale"
+        },
+        {
+          "id": "action",
+          "label": "Foto de acción",
+          "required": false,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable",
+          "requiresTransparentCutout": true
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "number",
+        "team"
+      ],
+      "layers": [
+        "paper-background",
+        "monochrome-portrait",
+        "vector-ink-splatter",
+        "action-cutout",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "grayscale",
+          "vector-ink-splatter",
+          "opacity"
+        ],
+        "generative": true,
+        "generativeBackground": true
+      },
+      "backgroundAsset": "backgrounds/ink-paper-splatter.png",
+      "referenceTreatment": "Retrato grande en blanco y negro, acción en color y salpicaduras de tinta."
+    },
+    {
+      "id": "signature-number-poster",
+      "name": "Dorsal con firma",
+      "reference": 10,
+      "photoCount": {
+        "min": 1,
+        "max": 2
+      },
+      "photoSlots": [
+        {
+          "id": "front",
+          "label": "Jugador de frente",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "back",
+          "label": "Jugador de espalda",
+          "required": false,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable",
+          "requiresTransparentCutout": true
+        }
+      ],
+      "textFields": [
+        "number",
+        "signatureText",
+        "team"
+      ],
+      "layers": [
+        "stadium-photo-or-gradient",
+        "back-photo-cutout",
+        "large-number",
+        "front-photo",
+        "signature-text"
+      ],
+      "effects": {
+        "allowed": [
+          "opacity",
+          "gradient",
+          "editable-script-font"
+        ],
+        "generative": true,
+        "generativeBackground": true
+      },
+      "backgroundAsset": "backgrounds/stadium-blue-light.png",
+      "referenceTreatment": "Doble Neymar, dorsal gigante y firma sobre estadio eléctrico azul."
+    },
+    {
+      "id": "match-action-glow",
+      "name": "Acción con destello gráfico",
+      "reference": 11,
+      "photoCount": {
+        "min": 1,
+        "max": 1
+      },
+      "photoSlots": [
+        {
+          "id": "hero",
+          "label": "Foto de partido",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "team",
+        "caption"
+      ],
+      "layers": [
+        "hero-photo",
+        "non-generative-glow-lines",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "vector-glow-lines",
+          "color-overlay"
+        ],
+        "generative": true,
+        "generativeBackground": true
+      },
+      "backgroundAsset": "backgrounds/stadium-blue-light.png",
+      "referenceTreatment": "Foto de acción con aura de neón dibujada alrededor de la silueta."
+    },
+    {
+      "id": "filmstrip-three-frames",
+      "name": "Tira de película",
+      "reference": 12,
+      "photoCount": {
+        "min": 3,
+        "max": 3
+      },
+      "photoSlots": [
+        {
+          "id": "frame-1",
+          "label": "Fotograma superior",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "frame-2",
+          "label": "Fotograma central",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "frame-3",
+          "label": "Fotograma inferior",
+          "required": false,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "team",
+        "caption"
+      ],
+      "layers": [
+        "filmstrip-photo-frames",
+        "film-perforation-vector",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "film-frame-vector"
+        ],
+        "generative": false
+      },
+      "referenceTreatment": "Tres fotogramas del jugador en tira vertical de película."
+    },
+    {
+      "id": "stadium-hero-crown",
+      "name": "ASTUR C.F.",
+      "reference": 13,
+      "photoCount": {
+        "min": 1,
+        "max": 1
+      },
+      "photoSlots": [
+        {
+          "id": "hero",
+          "label": "Foto del jugador",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "number",
+        "team",
+        "headline"
+      ],
+      "layers": [
+        "stadium-photo",
+        "hero-photo",
+        "optional-vector-crown",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "blue-stadium-background",
+          "non-generative-vector-glow-aura"
+        ],
+        "generative": true,
+        "generativeBackground": true
+      },
+      "backgroundAsset": "backgrounds/campo-astur-nocturno.png",
+      "referenceTreatment": "Fondo nocturno del campo del Astur, con gradas azules, focos y aura eléctrica violeta; rótulo ASTUR C.F. editable y jugador recortado en primer plano."
+    },
+    {
+      "id": "nine-photo-grid",
+      "name": "Collage 3 × 3",
+      "reference": 14,
+      "photoCount": {
+        "min": 9,
+        "max": 9
+      },
+      "photoSlots": [
+        {
+          "id": "photo-1",
+          "label": "Foto 1",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "photo-2",
+          "label": "Foto 2",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "photo-3",
+          "label": "Foto 3",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "photo-4",
+          "label": "Foto 4",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "photo-5",
+          "label": "Foto 5",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "photo-6",
+          "label": "Foto 6",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "photo-7",
+          "label": "Foto 7",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "photo-8",
+          "label": "Foto 8",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        },
+        {
+          "id": "photo-9",
+          "label": "Foto 9",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        }
+      ],
+      "textFields": [
+        "team",
+        "headline",
+        "subtitle"
+      ],
+      "layers": [
+        "grid-3x3",
+        "optional-team-header",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "grid-lines",
+          "color-overlay"
+        ],
+        "generative": false
+      },
+      "referenceTreatment": "Nueve fotos distintas en una cuadrícula editorial 3 × 3."
+    },
+    {
+      "id": "stadium-hero-pixarra",
+      "name": "LA PIXARRA",
+      "reference": 13,
+      "photoCount": {
+        "min": 1,
+        "max": 1
+      },
+      "photoSlots": [
+        {
+          "id": "hero",
+          "label": "Foto del jugador",
+          "required": true,
+          "crop": "free",
+          "position": "draggable",
+          "scale": "adjustable"
+        }
+      ],
+      "textFields": [
+        "playerName",
+        "number",
+        "team",
+        "headline"
+      ],
+      "layers": [
+        "stadium-photo",
+        "hero-photo",
+        "optional-vector-crown",
+        "text"
+      ],
+      "effects": {
+        "allowed": [
+          "blue-violet-stadium-background",
+          "non-generative-vector-glow-aura"
+        ],
+        "generative": true,
+        "generativeBackground": true
+      },
+      "backgroundAsset": "backgrounds/la-pixarra-nocturna.png",
+      "referenceTreatment": "Fondo nocturno de La Pixarra: cubierta, montañas y césped reconocibles, focos azules/violetas, nombre LA PIXARRA editable y jugador recortado."
+    }
+  ]
+}
