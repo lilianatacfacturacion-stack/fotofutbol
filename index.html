@@ -2819,4 +2819,23 @@ function templateGenerate(){
   templateRender();
 }
 function templateValidation(){var missing=[];for(var i=0;i<montagePhotos.length;i++){if(!montagePhotos[i]||!montagePhotos[i].img)missing.push(i+1);}if(missing.length)return{ok:false,message:'Falta cargar la foto '+missing.join(', ')+'.'};if(templateGeneratedBackgrounds[montageTemplate.id]&&!templateBackgroundImage)return{ok:false,message:'Espera a que cargue el fondo artístico antes de crear el montaje.'};var primary=templatePrimaryTextKey();if(primary&&!String(montageTexts[primary]||'').trim())return{ok:false,message:'Escribe '+(montageTextLabels[primary]||primary).toLowerCase()+' para completar el titular del montaje.'};var noAlpha=[];montagePhotos.forEach(function(p,i){var slot=montageTemplate.photoSlots[i],needsCutout=(slot&&slot.requiresTransparentCutout)||(i===0&&!!templateGeneratedBackgrounds[montageTemplate.id])||(montagePhotos.length===1&&i===0&&templateUsesFullBleed(montageTemplate.id));if(needsCutout&&!p.cutoutImg&&!templateHasTransparency(p.img))noAlpha.push((slot&&slot.label)||'jugador protagonista');});if(noAlpha.length)return{ok:false,message:'Para componer este cartel, marca y aísla al jugador protagonista en su tarjeta. Así la figura real queda delante del fondo artístico.'};return{ok:true,message:''};}
-function templateHasT
+function templateHasTransparency(img){try{var c=document.createElement('canvas');c.width=64;c.height=64;var x=c.getContext('2d',{willReadFrequently:true});x.clearRect(0,0,64,64);x.drawImage(img,0,0,64,64);var d=x.getImageData(0,0,64,64).data;for(var i=3;i<d.length;i+=4){if(d[i]<248)return true;}return false;}catch(e){return false;}}
+function templateDownload(){var cv=document.getElementById('template-canvas');if(!cv.dataset.ready){templateGenerate();if(!cv.dataset.ready)return;}var a=document.createElement('a');a.download=(montageTemplate.id||'montaje')+'.png';a.href=cv.toDataURL('image/png');a.click();}
+templateInit();
+editInitFaceMaskDrawing();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
