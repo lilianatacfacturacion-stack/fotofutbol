@@ -290,7 +290,7 @@ body{background:#f3efe6;color:#292d29;padding-bottom:48px}
         "allowed": [
           "gradient",
           "opacity",
-          "non-generative-vector-light-lines"
+          "soft-stadium-lighting"
         ],
         "generative": true,
         "generativeBackground": true
@@ -605,7 +605,7 @@ body{background:#f3efe6;color:#292d29;padding-bottom:48px}
         "allowed": [
           "opacity",
           "gradient",
-          "non-generative-light-lines"
+          "soft-stadium-lighting"
         ],
         "generative": true,
         "generativeBackground": true
@@ -741,12 +741,12 @@ body{background:#f3efe6;color:#292d29;padding-bottom:48px}
       ],
       "layers": [
         "hero-photo",
-        "non-generative-glow-lines",
+        "soft-stadium-lighting",
         "text"
       ],
       "effects": {
         "allowed": [
-          "vector-glow-lines",
+          "soft-stadium-lighting",
           "color-overlay"
         ],
         "generative": true,
@@ -840,7 +840,7 @@ body{background:#f3efe6;color:#292d29;padding-bottom:48px}
       "effects": {
         "allowed": [
           "blue-stadium-background",
-          "non-generative-vector-glow-aura"
+          "soft-environmental-light"
         ],
         "generative": true,
         "generativeBackground": true
@@ -982,7 +982,7 @@ body{background:#f3efe6;color:#292d29;padding-bottom:48px}
       "effects": {
         "allowed": [
           "blue-violet-stadium-background",
-          "non-generative-vector-glow-aura"
+          "soft-environmental-light"
         ],
         "generative": true,
         "generativeBackground": true
@@ -2658,7 +2658,7 @@ function templateChoose(id){
   montagePhotos.forEach(function(p){if(p.url)URL.revokeObjectURL(p.url);});montagePhotos=[];montageTexts={};montageTextPositions={};montageTextSizes={};montageTextColors={};montageTextFonts={};montageTextBoxes={};templateCutoutRegions={};montageSelectedPhoto=0;
   document.querySelectorAll('.template-card').forEach(function(c){c.classList.toggle('selected',c.querySelector('strong').textContent===montageTemplate.name);});
   document.getElementById('template-gallery-screen').hidden=true;document.getElementById('template-workspace').hidden=false;document.getElementById('template-title').textContent=montageTemplate.name;
-  var guidance={'hero-double-exposure':'Con 1 foto: aísla al jugador de la misma imagen para crear dos planos. Con 2: usa un retrato cercano a sangre y una acción recortada por delante.','front-back-number-poster':'Con 1 foto, recorta al jugador y colócalo delante del fondo eléctrico. Con 2, añade una segunda capa para crear el efecto de doble plano.','club-triple-exposure':'Con 1 foto: destaca al jugador desde esa imagen. Con varias: retrato a sangre como fondo y cada jugador recortado por separado en primer plano.','monochrome-portrait-action':'Con 1 foto: fondo monocromo más jugador recortado en color. Con 2: retrato monocromo a sangre y acción recortada delante.','signature-number-poster':'Con 1 foto: aísla al jugador de esa imagen; con 2, usa la primera como fondo y la segunda por delante del dorsal.','action-photo-editorial':'La foto cubre el cartel de borde a borde; el texto y los acentos gráficos se colocan encima.','smoke-stadium-hero':'El fondo de estadio con humo y fuego ocupa todo el cartel; el jugador recortado se coloca delante.','match-action-glow':'Estadio azul a sangre, jugador recortado e iluminación ambiental suave, sin trazos superpuestos.','stadium-hero-crown':'Fondo nocturno del campo del Astur y jugador recortado en primer plano, sin rayas ni arcos añadidos.'};document.getElementById('template-description').textContent=guidance[id]||montageTemplate.referenceTreatment||'Carga tus fotos. En los carteles, la imagen principal cubre el fondo; en los modelos de varias escenas, cada imagen ocupa su marco diseñado.';
+  var guidance={'hero-double-exposure':'Con 1 foto: aísla al jugador de la misma imagen para crear dos planos. Con 2: usa un retrato cercano a sangre y una acción recortada por delante.','front-back-number-poster':'Con 1 foto, recorta al jugador y colócalo delante del estadio nocturno limpio. Con 2, añade una segunda capa para crear el efecto de doble plano.','club-triple-exposure':'Con 1 foto: destaca al jugador desde esa imagen. Con varias: retrato a sangre como fondo y cada jugador recortado por separado en primer plano.','monochrome-portrait-action':'Con 1 foto: fondo monocromo más jugador recortado en color. Con 2: retrato monocromo a sangre y acción recortada delante.','signature-number-poster':'Con 1 foto: aísla al jugador de esa imagen; con 2, usa la primera como fondo y la segunda por delante del dorsal.','action-photo-editorial':'La foto cubre el cartel de borde a borde; el texto y los acentos gráficos se colocan encima.','smoke-stadium-hero':'El fondo de estadio con humo y fuego ocupa todo el cartel; el jugador recortado se coloca delante.','match-action-glow':'Estadio azul a sangre, jugador recortado e iluminación ambiental suave, sin trazos superpuestos.','stadium-hero-crown':'Fondo nocturno del campo del Astur y jugador recortado en primer plano, sin rayas ni arcos añadidos.'};document.getElementById('template-description').textContent=guidance[id]||montageTemplate.referenceTreatment||'Carga tus fotos. En los carteles, la imagen principal cubre el fondo; en los modelos de varias escenas, cada imagen ocupa su marco diseñado.';
   var count=document.getElementById('template-count'),wrap=document.getElementById('template-count-wrap');count.innerHTML='';
   for(var n=montageTemplate.photoCount.min;n<=montageTemplate.photoCount.max;n++){var o=document.createElement('option');o.value=n;o.textContent=n+' foto'+(n===1?'':'s');count.appendChild(o);}wrap.hidden=montageTemplate.photoCount.min===montageTemplate.photoCount.max;
   document.getElementById('template-text-size').value=150;document.getElementById('template-text-size-value').textContent='150';
